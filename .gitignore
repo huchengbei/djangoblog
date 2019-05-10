@@ -1,0 +1,9 @@
+*/__pycache__/*
+*/migrations/*
+.idea/*
+static/*
+venv/*
+whoosh_index/*
+.vscode/*
+*.pyc
+*.DS_Store
