@@ -1,4 +1,7 @@
 Django==2.2.1
+imagekit==1.0.6
 mysqlclient==1.4.2.post1
+pilkit==2.0
+Pillow==6.0.0
 pytz==2019.1
 sqlparse==0.3.0
