@@ -1,0 +1,45 @@
+{% extends 'account/base.html' %}
+{% load static %}
+{% block body %}
+	<div class="card">
+{#        <img src="captiveportal-logo.svg"/><br>#}
+ 		<h1>登录</h1>
+	  <form name="form" method="post" action="{% url 'account:login' %}">
+          {% csrf_token %}
+          <div>
+              <span>
+              <label for="{{ form.username.id_for_label }}">{{ form.username.label }}:</label>
+              {{ form.username }}
+              </span>
+              {{ form.non_field_errors }}
+          </div>
+          <div>
+              <span>
+              <label for="{{ form.password.id_for_label }}">{{ form.password.label }}:</label>
+              {{ form.password }}
+              </span>
+              {{ form.password.errors }}
+          </div>
+          <input type="hidden" id="to_url" name="to_url" value="{{ to_url }}">
+		  <div class="help">
+			<ul class="list">
+				<li class="list__item">
+				  <label class="label--checkbox">
+					  <input type="checkbox" class="remember">
+					  <span>Remember Me</span>
+				  </label>
+				</li>
+			</ul>
+		  </div>
+		<input type="submit" name="submit" class="submit" value="登录" id="login">
+	  </form>
+    <div>
+      <p>
+          <span>第三方登录: </span>
+                <a href=""><span class="am-icon-github am-icon-sm"></span></a>
+                <a href=""><span class="am-icon-weibo am-icon-sm"></span></a>
+                <a href=""><span class="am-icon-weixin am-icon-sm"></span></a>
+            </p>
+    </div>
+    </div>
+{% endblock %}

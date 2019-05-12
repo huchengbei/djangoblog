@@ -1,0 +1,44 @@
+{% extends 'account/base.html' %}
+{% load static %}
+{% block body %}
+	<div class="card">
+{#        <img src="captiveportal-logo.svg"/><br>#}
+ 		<h1>注册</h1>
+	  <form name="form" method="post" action="{% url 'account:register' %}">
+          {% csrf_token %}
+          <div>
+              <span>
+              <label for="{{ form.username.id_for_label }}">{{ form.username.label }}:</label>
+              {{ form.username }}
+              </span>
+              {{ form.username.errors }}
+          </div>
+          <div>
+              <span>
+              <label for="{{ form.email.id_for_label }}">{{ form.email.label }}:</label>
+              {{ form.email }}
+              </span>
+              {{ form.email.errors }}
+          </div>
+          <div>
+              <span>
+              <label for="{{ form.password1.id_for_label }}">{{ form.password1.label }}:</label>
+              {{ form.password1 }}
+              </span>
+              {{ form.password1.errors }}
+          </div>
+          <div>
+              <span>
+              <label for="{{ form.password2.id_for_label }}">{{ form.password2.label }}:</label>
+              {{ form.password2 }}
+              </span>
+              {{ form.password2.errors }}
+          </div>
+		<input type="submit" name="submit" class="submit" value="注册" id="login">
+	  </form>
+    <div>
+        <p><a href="{% url 'account:login' %}">已有账号，返回登录</a></p>
+    </div>
+
+	</div>
+{% endblock %}

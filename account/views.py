@@ -1,20 +1,18 @@
 from django.contrib import auth
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
 
 # Create your views here.
 from django.urls import reverse
 from django.utils.http import is_safe_url
-from django.views.generic import ListView, DetailView, FormView, RedirectView
+from django.views.generic import  FormView, RedirectView
 
 from account.forms import UserCreationForm, LoginForm
-from account.models import User
 
 
 class RegisterView(FormView):
     form_class = UserCreationForm
-    template_name = 'account/re.html'
+    template_name = 'account/register.html'
 
     def form_valid(self, form):
         user = form.save(False)
@@ -33,7 +31,7 @@ class RegisterView(FormView):
 
 class LoginView(FormView):
     form_class = LoginForm
-    template_name = 'account/lo.html'
+    template_name = 'account/login.html'
     default_success_url = '/admin'
 
     def get_context_data(self, **kwargs):
