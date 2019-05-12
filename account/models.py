@@ -8,11 +8,12 @@ from pilkit.processors import ResizeToFill
 
 class User(AbstractUser):
     nickname = models.CharField('昵称', max_length=20, blank=True)
-    link = models.URLField('个人网址', blank=True ,help_text='请输入个人网址')
+    link = models.URLField('个人网址', blank=True, help_text='请输入个人网址')
     avatar = ProcessedImageField(upload_to='avatar/%Y/%m/%d',
                                  default='avatar/default.png',
                                  verbose_name='头像',
                                  processors=[ResizeToFill(80, 80)])
+    email = models.EmailField('邮件地址')
     create_time = models.DateTimeField('创建时间', auto_now_add=True)
     update_time = models.DateTimeField('修改时间', auto_now=True)
 
