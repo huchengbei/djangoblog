@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <!-- content srart -->
+    <div class="am-g am-g-fixed blog-fixed">
+        <div class="am-u-md-8 am-u-sm-12">
+            {% for article in article_list %}
+                <article class="am-g blog-entry-article">
+                    <header>
+                        <span class="am-article-title" ><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></span>
+                        <div class="am-article-meta">
+                            <span>
+                                <a href="{{ article.category.get_absolute_url }}"
+                                    class="blog-color">{{ article.category.name }} &nbsp;</a>
+                            </span>
+                            <span> @{{ article.author }} &nbsp;</span>
+                            <span>{{ article.pub_time|date:'Y/m/d' }}</span>
+                        </div>
+                    </header>
+                    <hr>
+
+
+                    <div class="am-article-bd am-container" style="padding-left: 0px">
+                        {% if article.image_link %}
+                            <div class="am-u-md-4 blog-entry-img">
+                                <img src="{{ article.image_link }}" alt="" class="am-u-sm-12">
+                            </div>
+                            <div class="am-u-md-8 blog-entry-text">
+                                <p>
+                                    {{ article.summary|safe }}
+                            </div>
+                        {% else %}
+                            <div class="blog-entry-text">
+                                <p>
+                                    {{ article.summary|safe }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="" style="padding-right: 10px; float: right">
+                        <a href="{{ article.get_absolute_url }}">Read More</a>
+                    </div>
+                </article>
+            {% endfor %}
+            <ul class="am-pagination">
+                <li class="am-pagination-prev"><a href="">&laquo; Prev</a></li>
+                <li class="am-pagination-next"><a href="">Next &raquo;</a></li>
+            </ul>
+        </div>
+
+        {% include 'blog/side_bar.html' %}
+
+    </div>
+{% endblock %}
+<!-- content end -->
