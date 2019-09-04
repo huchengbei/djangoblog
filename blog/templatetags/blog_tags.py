@@ -2,6 +2,8 @@ import markdown
 from django import template
 from django.template.defaultfilters import stringfilter
 
+from blog.models import Article, Category, Tag
+
 register = template.Library()
 
 extension_configs = {
@@ -50,3 +52,25 @@ def get_nav_dict():
 def markdown_to_html(body):
     md = get_md()
     return md.convert(body)
+
+
+@register.simple_tag(name='get_article_list')
+def get_article_list(sort=None, num=None):
+    if sort:
+        if num:
+            return Article.objects.order_by(sort)[:num]
+        return Article.objects.order_by(sort)
+    if num:
+        return Article.objects.all()[:num]
+    return Article.objects.all()
+
+
+@register.simple_tag(name='get_category_list')
+def get_category_list():
+    return Category.objects.all()
+
+
+@register.simple_tag(name='get_tag_list')
+def get_tag_list():
+    from django.db.models import Count
+    return Tag.objects.annotate(Count('article'))
