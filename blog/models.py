@@ -11,8 +11,6 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from slugify import slugify
 
-from blog.templatetags.blog_tags import markdown_to_html
-
 
 class BaseModel(models.Model):
     id = models.AutoField(primary_key=True)
@@ -87,6 +85,7 @@ class Article(BaseModel):
         if not self.slug:
             self.slug = slugify(self.title)
         if not self.summary:
+            from blog.templatetags.blog_tags import markdown_to_html
             self.summary = markdown_to_html(self.body)[0:300]
         super().save(*args, **kwargs)
 
@@ -143,10 +142,6 @@ class Category(BaseModel):
         return category_list[::-1]
 
     def get_child_category_dict(self):
-        dic = {
-            self: {}
-        }
-
         def make_dict(dic):
             for k, v in dic.items():
                 sub_category_list = Category.objects.filter(parent=k)
@@ -154,6 +149,10 @@ class Category(BaseModel):
                     dic[k][c] = {}
             for k, v in dic.items():
                 make_dict(dic[k])
+
+        dic = {
+            self: {}
+        }
 
         make_dict(dic)
         return dic
