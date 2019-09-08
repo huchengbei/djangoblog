@@ -16,6 +16,28 @@ class IndexView(ListView):
         return articles.filter(type='article', status='published')
 
 
+class CategoryArticlesView(ListView):
+    model = Article
+    template_name = 'blog/index.html'
+    context_object_name = 'article_list'
+
+    def get_queryset(self):
+        slug = self.kwargs.get('slug')
+        articles = super(CategoryArticlesView, self).get_queryset()
+        return articles.filter(type='article', status='published').filter(category__slug=slug)
+
+
+class TagArticlesView(ListView):
+    model = Article
+    template_name = 'blog/index.html'
+    context_object_name = 'article_list'
+
+    def get_queryset(self):
+        slug = self.kwargs.get('slug')
+        articles = super(TagArticlesView, self).get_queryset()
+        return articles.filter(type='article', status='published').filter(tags__slug=slug)
+
+
 class ArticleView(DetailView):
     model = Article
     template_name = 'blog/article.html'
