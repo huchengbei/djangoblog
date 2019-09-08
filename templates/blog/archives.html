@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load blog_tags %}
+<!-- content srart -->
+{% block content %}
+<div class="am-g am-g-fixed blog-fixed blog-content">
+    <div class="am-u-sm-12">
+        <h1 class="blog-text-center">-- 归档 --</h1>
+        {% for archives_year in archives %}
+        <div class="timeline-year">
+            <h1>{{ archives_year }}</h1>
+            <hr>
+                {% for archives_month in archives_year %}
+                <ul>
+                <h3>{{ archives_month }} 月</h3>
+                <hr>
+                    {% for article in archives_month %}
+                <li>
+                    <span class="am-u-sm-4 am-u-md-2 timeline-span">{{ article.pub_time }}</span>
+                    <span class="am-u-sm-8 am-u-md-6"><a href="#">{{ article }}</a></span>
+                    <span class="am-u-sm-4 am-u-md-2 am-hide-sm-only">{{ article.category }}</span>
+                    <span class="am-u-sm-4 am-u-md-2 am-hide-sm-only">{{ article.author }}</span>
+                </li>
+                    {% endfor %}
+                </ul>
+                <br>
+                <br>
+                {% endfor %}
+        </div>
+        {% endfor %}
+        <hr>
+    </div>
+
+
+</div>
+{% endblock %}
+<!-- content end -->

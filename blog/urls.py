@@ -9,4 +9,5 @@ urlpatterns = [
     path(r'page/<slug:slug>', views.ArticleView.as_view(), name='page'),
     path(r'category/<slug:slug>', views.IndexView.as_view(), name='category'),
     path(r'tag/<slug:slug>', views.IndexView.as_view(), name='tag'),
+    path(r'archive', views.ArchiveView.as_view(), name='tag'),
 ]

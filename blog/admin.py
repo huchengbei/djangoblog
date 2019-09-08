@@ -5,7 +5,7 @@ from django.contrib.sites.models import Site
 from django.urls import reverse
 from django.utils.html import format_html
 
-from blog.models import Article, Tag, Category, FriendLink, ExtendsSideBar, BlogSetting, Navigation
+from blog.models import Article, Tag, Category, FriendLink, ExtendsSideBar, BlogSetting, Navigation, Link
 
 
 def publish_article(modeladmin, request, queryset):
@@ -36,7 +36,8 @@ class ArticleAdmin(admin.ModelAdmin):
     search_fields = ('body', 'title')
     # form = ArticleForm
     list_display = (
-        'id', 'title', 'author', 'link_to_category', 'views', 'status', 'type', 'create_time', 'update_time')
+        'id', 'title', 'author', 'link_to_category', 'views', 'status', 'type', 'create_time', 'pub_time',
+        'update_time')
     list_display_links = ('id', 'title')
     list_filter = ('author', 'status', 'type', 'category', 'tags')
     filter_horizontal = ('tags',)
@@ -71,6 +72,11 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
+    exclude = ['create_time', 'update_time']
+
+
+@admin.register(Link)
+class LinkAdmin(admin.ModelAdmin):
     exclude = ['create_time', 'update_time']
 
 

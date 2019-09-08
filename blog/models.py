@@ -222,14 +222,27 @@ class Navigation(BaseModel):
         if self.type == 'article' or self.type == 'page':
             return Article.objects.filter(id=self.instance_id).first().get_absolute_url()
         if self.type == 'link':
-            return FriendLink.objects.filter(id=self.instance_id).first().get_absolute_url()
+            return Link.objects.filter(id=self.instance_id).first().get_absolute_url()
         return '#'
 
 
-class FriendLink(BaseModel):
+class Link(BaseModel):
     name = models.CharField('网站名', max_length=30, unique=True)
-    link = models.URLField('友链地址')
+    url = models.CharField('链接地址', max_length=200)
     logo = models.URLField('网址Logo', blank=True)
+
+    class Meta:
+        verbose_name = '链接'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return str(self.url)
+
+
+class FriendLink(Link):
     sequence = models.IntegerField('排序', unique=True)
     is_show = models.BooleanField('是否展示', default=True)
 
@@ -237,12 +250,6 @@ class FriendLink(BaseModel):
         ordering = ['sequence']
         verbose_name = '友情链接'
         verbose_name_plural = verbose_name
-
-    def __str__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return str(self.link)
 
 
 class ExtendsSideBar(models.Model):
