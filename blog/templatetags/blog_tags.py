@@ -67,10 +67,14 @@ def get_article_list(sort=None, num=None):
 
 @register.simple_tag(name='get_category_list')
 def get_category_list():
-    return Category.objects.all()
+    from django.db.models import Count
+    from django.db.models import Q
+    return Category.objects.annotate(article__count=Count('article', filter=Q(article__type='article')))
 
 
 @register.simple_tag(name='get_tag_list')
 def get_tag_list():
     from django.db.models import Count
-    return Tag.objects.annotate(Count('article'))
+    from django.db.models import Q
+    # return Tag.objects.annotate(Count('article', filter=Q(article__type='article')))
+    return Tag.objects.annotate(article__count=Count('article', filter=Q(article__type='article')))

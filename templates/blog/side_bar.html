@@ -15,7 +15,7 @@
         {% get_category_list as category_list %}
         <ul class="am-list" style="text-align: left">
         {% for category in category_list %}
-            <li><a href="{{ category.get_absolute_url }}">{{ category }}</a></li>
+            <li><a href="{{ category.get_absolute_url }}">{{ category }}({{ category.article__count }})</a></li>
         {% endfor %}
         </ul>
     </div>
@@ -33,7 +33,7 @@
         {% get_tag_list as tag_list %}
         <div class="am-u-sm-12 blog-clear-padding">
             {% for tag in tag_list %}
-            <a href="" class="blog-tag" style="font-size:  {{ tag.article__count |add:20}}px">{{ tag.name }}
+            <a href="{{ tag.get_absolute_url }}" class="blog-tag" style="font-size:  {{ tag.article__count |add:20}}px">{{ tag.name }}
                 ({{ tag.article__count }})</a>
             {% endfor %}
         </div>
