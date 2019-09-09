@@ -4,7 +4,7 @@ import markdown
 from django import template
 from django.template.defaultfilters import stringfilter
 
-from blog.models import Article, Category, Tag, ExtendsSideBar
+from blog.models import Article, Category, Tag, ExtendsSideBar, FriendLink
 
 register = template.Library()
 
@@ -91,6 +91,11 @@ def get_tag_list():
     now = datetime.datetime.now()
     q = Q(article__type='article', article__status='published', article__pub_time__lte=now)
     return Tag.objects.annotate(article__count=Count('article', filter=q))
+
+
+@register.simple_tag(name='get_friend_link_list')
+def get_friend_link_list():
+    return FriendLink.objects.filter(is_show=True)
 
 
 @register.simple_tag(name='get_extends_sidebar_list')

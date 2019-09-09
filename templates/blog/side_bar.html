@@ -38,6 +38,17 @@
             {% endfor %}
         </div>
     </div>
+    {% get_friend_link_list as friend_link_list %}
+    {% if friend_link_list %}
+        <div class="blog-sidebar-widget blog-bor">
+            <h2 class="blog-title"><span>友链</span></h2>
+            <ul class="am-list" style="text-align: left">
+                {% for friend_link in friend_link_list %}
+                    <li><a href="{{ friend_link.get_absolute_url }}">{{ friend_link }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
     {% get_extends_sidebar_list as sidebar_list %}
     {% for sidebar in sidebar_list %}
         <div class="blog-clear-margin blog-sidebar-widget blog-bor am-g ">
