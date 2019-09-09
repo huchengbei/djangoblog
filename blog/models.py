@@ -2,7 +2,6 @@ from abc import abstractmethod
 
 from django.conf import settings
 from django.contrib.sites.models import Site
-from django.contrib.sites.shortcuts import get_current_site
 from django.core.exceptions import ValidationError
 from django.db import models
 
@@ -211,7 +210,7 @@ class Navigation(BaseModel):
             if self.type == 'category':
                 self.name = Category.objects.filter(id=self.instance_id).first().name
             if self.type == 'article' or self.type == 'page':
-                self.name = Article.objects.filter(id=self.instance_id).first().name
+                self.name = Article.objects.filter(id=self.instance_id).first().title
             if self.type == 'link':
                 self.name = FriendLink.objects.filter(id=self.instance_id).first().name
         super().save(*args, **kwargs)

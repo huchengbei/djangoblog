@@ -5,6 +5,7 @@ from django.contrib.sites.models import Site
 from django.urls import reverse
 from django.utils.html import format_html
 
+from blog.forms import NavigationForm
 from blog.models import Article, Tag, Category, FriendLink, ExtendsSideBar, BlogSetting, Navigation, Link
 
 
@@ -63,6 +64,7 @@ class ArticleAdmin(admin.ModelAdmin):
 class NavigationAdmin(admin.ModelAdmin):
     exclude = ['create_time', 'update_time']
     list_select_related = ['parent', ]
+    form = NavigationForm
 
 
 @admin.register(Category)
