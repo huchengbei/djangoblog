@@ -1,13 +1,13 @@
 {% load static %}
 {% load blog_tags %}
 <div class="am-u-md-4 am-u-sm-12 blog-sidebar">
-    {% get_article_list '-views' 10 as article_list %}
+    {% get_article_list '-pub_time' 10 as article_list %}
     {% if article_list %}
         <div class="blog-sidebar-widget blog-bor">
-            <h2 class="blog-title"><span>Views</span></h2>
+            <h2 class="blog-title"><span>近期文章</span></h2>
             <ul class="am-list" style="text-align: left">
                 {% for article in article_list %}
-                    <li><a href="{{ article.get_absolute_url }}">{{ article }}- {{ article.views }}</a></li>
+                    <li><a href="{{ article.get_absolute_url }}">{{ article }}-{{ article.pub_time|date:'Y/m/d' }}</a></li>
                 {% endfor %}
             </ul>
         </div>
@@ -25,28 +25,28 @@
         </div>
     {% endif %}
 
-    {% get_article_list '-pub_time' 10 as article_list %}
-    {% if article_list %}
-        <div class="blog-sidebar-widget blog-bor">
-            <h2 class="blog-title"><span>近期文章</span></h2>
-            <ul class="am-list" style="text-align: left">
-                {% for article in article_list %}
-                    <li><a href="{{ article.get_absolute_url }}">{{ article }}-{{ article.pub_time|date:'Y/m/d' }}</a></li>
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
-
     {% get_tag_list as tag_list %}
     {% if tag_list %}
         <div class="blog-clear-margin blog-sidebar-widget blog-bor am-g ">
-            <h2 class="blog-title"><span>TAG cloud</span></h2>
+            <h2 class="blog-title"><span>标签云</span></h2>
             <div class="am-u-sm-12 blog-clear-padding">
                 {% for tag in tag_list %}
                     <a href="{{ tag.get_absolute_url }}" class="blog-tag" style="font-size:  {{ tag.article__count |add:20}}px">{{ tag.name }}
                         ({{ tag.article__count }})</a>
                 {% endfor %}
             </div>
+        </div>
+    {% endif %}
+
+    {% get_article_list '-views' 10 as article_list %}
+    {% if article_list %}
+        <div class="blog-sidebar-widget blog-bor">
+            <h2 class="blog-title"><span>热门</span></h2>
+            <ul class="am-list" style="text-align: left">
+                {% for article in article_list %}
+                    <li><a href="{{ article.get_absolute_url }}">{{ article }}- {{ article.views }}</a></li>
+                {% endfor %}
+            </ul>
         </div>
     {% endif %}
 
