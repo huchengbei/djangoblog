@@ -13,7 +13,7 @@
                     </a>
                     <ul class="am-dropdown-content">
                         {% for k, v in value.items %}
-                            <li><a href="{{ k.get_absolute_url }}">{{ k.name }}</a></li>
+                            <li><a href="{{ k.get_absolute_url }}">{{ k }}</a></li>
                         {% endfor %}
                     </ul>
                 </li>

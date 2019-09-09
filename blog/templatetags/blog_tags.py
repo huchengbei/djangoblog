@@ -37,10 +37,16 @@ def get_nav_dict():
     def make_dict(d):
         for key, value in d.items():
             sub_nav_list = Navigation.objects.filter(parent=key, is_show=True)
-            for nav in sub_nav_list:
-                d[key][nav] = {}
-        for key, value in d.items():
-            make_dict(d[key])
+            if sub_nav_list:
+                for nav in sub_nav_list:
+                    d[key][nav] = {}
+                make_dict(d[key])
+            elif key.type == 'category':
+                category_id = key.instance_id
+                c = Category.objects.get(id=category_id)
+                article_list = Article.objects.filter(category=c, type='article', status='published')
+                for article in article_list:
+                    d[key][article] = {}
 
     make_dict(dic)
     return dic
