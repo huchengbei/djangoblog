@@ -1,3 +1,5 @@
+import datetime
+
 import markdown
 from django import template
 from django.template.defaultfilters import stringfilter
@@ -62,29 +64,35 @@ def markdown_to_html(body):
 
 @register.simple_tag(name='get_article_list')
 def get_article_list(sort=None, num=None):
+    now = datetime.datetime.now()
+    articles = Article.objects.filter(status='published', type='article', pub_time__lte=now)
     if sort:
         if num:
-            return Article.objects.order_by(sort)[:num]
-        return Article.objects.order_by(sort)
+            return articles.order_by(sort)[:num]
+        return articles.order_by(sort)
     if num:
-        return Article.objects.all()[:num]
-    return Article.objects.all()
+        return articles[:num]
+    return articles
 
 
 @register.simple_tag(name='get_category_list')
 def get_category_list():
     from django.db.models import Count
     from django.db.models import Q
-    return Category.objects.annotate(article__count=Count('article', filter=Q(article__type='article')))
+    now = datetime.datetime.now()
+    q = Q(article__type='article', article__status='published', article__pub_time__lte=now)
+    return Category.objects.annotate(article__count=Count('article', filter=q))
 
 
 @register.simple_tag(name='get_tag_list')
 def get_tag_list():
     from django.db.models import Count
     from django.db.models import Q
-    return Tag.objects.annotate(article__count=Count('article', filter=Q(article__type='article')))
+    now = datetime.datetime.now()
+    q = Q(article__type='article', article__status='published', article__pub_time__lte=now)
+    return Tag.objects.annotate(article__count=Count('article', filter=q))
 
 
 @register.simple_tag(name='get_extends_sidebar_list')
 def get_extends_sidebar_list():
-    return ExtendsSideBar.objects.all()
+    return ExtendsSideBar.objects.filter(is_show=True)

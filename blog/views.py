@@ -1,3 +1,5 @@
+import datetime
+
 from django.shortcuts import render
 
 # Create your views here.
@@ -6,36 +8,35 @@ from django.views.generic import ListView, DetailView
 from blog.models import Article
 
 
-class IndexView(ListView):
+class BaseArticlesListView(ListView):
     model = Article
     template_name = 'blog/index.html'
     context_object_name = 'article_list'
 
     def get_queryset(self):
-        articles = super(IndexView, self).get_queryset()
-        return articles.filter(type='article', status='published')
+        articles = super(BaseArticlesListView, self).get_queryset()
+        now = datetime.datetime.now()
+        return articles.filter(type='article', status='published', pub_time__lte=now)
 
 
-class CategoryArticlesView(ListView):
-    model = Article
-    template_name = 'blog/index.html'
-    context_object_name = 'article_list'
+class IndexView(BaseArticlesListView):
+    pass
+
+
+class CategoryArticlesView(BaseArticlesListView):
 
     def get_queryset(self):
         slug = self.kwargs.get('slug')
         articles = super(CategoryArticlesView, self).get_queryset()
-        return articles.filter(type='article', status='published').filter(category__slug=slug)
+        return articles.filter(category__slug=slug)
 
 
-class TagArticlesView(ListView):
-    model = Article
-    template_name = 'blog/index.html'
-    context_object_name = 'article_list'
+class TagArticlesView(BaseArticlesListView):
 
     def get_queryset(self):
         slug = self.kwargs.get('slug')
         articles = super(TagArticlesView, self).get_queryset()
-        return articles.filter(type='article', status='published').filter(tags__slug=slug)
+        return articles.filter(tags__slug=slug)
 
 
 class ArticleView(DetailView):
@@ -50,8 +51,7 @@ class ArticleView(DetailView):
 #     TODO: add judge when the article is draft or deleted @chengbei
 
 
-class ArchiveView(ListView):
-    model = Article
+class ArchiveView(BaseArticlesListView):
     template_name = 'blog/archives.html'
     context_object_name = 'archives'
 
@@ -78,7 +78,7 @@ class ArchiveView(ListView):
                     return str(self.day)
                 return 'NoName'
 
-        articles = super(ArchiveView, self).get_queryset().order_by('pub_time')
+        articles = super(ArchiveView, self).get_queryset()
         old_year = 0000
         old_month = 0
         archives = ArticleList()
@@ -90,20 +90,20 @@ class ArchiveView(ListView):
             if year != old_year:
                 old_year = year
                 if month_list:
-                    year_list.insert(0, month_list)
+                    year_list.append(month_list)
                 month_list = ArticleList(type='month', month=month)
                 if year_list:
-                    archives.insert(0, year_list)
+                    archives.append(year_list)
                 year_list = ArticleList(type='year', year=year)
             if month != old_month:
                 old_month = month
                 if month_list:
-                    year_list.insert(0, month_list)
+                    year_list.append(month_list)
                 month_list = ArticleList(type='month', month=month)
-            month_list.insert(0, article)
+            month_list.append(article)
         if month_list:
-            year_list.insert(0, month_list)
+            year_list.append(month_list)
         if year_list:
-            archives.insert(0, year_list)
+            archives.append(year_list)
 
         return archives
