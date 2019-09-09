@@ -38,5 +38,14 @@
             {% endfor %}
         </div>
     </div>
+    {% get_extends_sidebar_list as sidebar_list %}
+    {% for sidebar in sidebar_list %}
+        <div class="blog-clear-margin blog-sidebar-widget blog-bor am-g ">
+            <h2 class="blog-title"><span>{{ sidebar }}</span></h2>
+            <div class="am-u-sm-12 blog-clear-padding">
+                {{ sidebar.content|safe }}
+            </div>
+        </div>
+    {% endfor %}
 
 </div>

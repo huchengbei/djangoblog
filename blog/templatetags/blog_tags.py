@@ -2,7 +2,7 @@ import markdown
 from django import template
 from django.template.defaultfilters import stringfilter
 
-from blog.models import Article, Category, Tag
+from blog.models import Article, Category, Tag, ExtendsSideBar
 
 register = template.Library()
 
@@ -82,5 +82,9 @@ def get_category_list():
 def get_tag_list():
     from django.db.models import Count
     from django.db.models import Q
-    # return Tag.objects.annotate(Count('article', filter=Q(article__type='article')))
     return Tag.objects.annotate(article__count=Count('article', filter=Q(article__type='article')))
+
+
+@register.simple_tag(name='get_extends_sidebar_list')
+def get_extends_sidebar_list():
+    return ExtendsSideBar.objects.all()
