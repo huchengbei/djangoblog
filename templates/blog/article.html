@@ -26,8 +26,8 @@
         
         <hr>
         <ul class="am-pagination blog-article-margin">
-          <li class="am-pagination-prev"><a href="#" class="">&laquo; 一切的回顾</a></li>
-          <li class="am-pagination-next"><a href="">不远的未来 &raquo;</a></li>
+          <li class="am-pagination-prev"><a href="{{ article.get_pre.get_absolute_url }}" class="">&laquo; 一切的回顾</a></li>
+          <li class="am-pagination-next"><a href="{{ article.get_next.get_absolute_url }}">不远的未来 &raquo;</a></li>
         </ul>
         
         <hr>
