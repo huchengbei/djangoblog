@@ -82,7 +82,7 @@ class Article(BaseModel):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)
+            self.slug = slugify(self.title)[0:50]
         if not self.summary:
             self.summary = self.body[0:350]
         super().save(*args, **kwargs)
