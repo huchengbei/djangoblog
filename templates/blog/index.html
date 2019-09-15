@@ -31,12 +31,12 @@
                             </div>
                             <div class="am-u-md-8 blog-entry-text">
                                 <p>
-                                    {{ article.summary|safe }}
+                                    {{ article.summary|markdown_to_html|safe }}
                             </div>
                         {% else %}
                             <div class="blog-entry-text">
                                 <p>
-                                    {{ article.summary|safe }}
+                                    {{ article.summary|markdown_to_html|safe }}
                             </div>
                         {% endif %}
                     </div>

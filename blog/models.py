@@ -83,8 +83,7 @@ class Article(BaseModel):
         if not self.slug:
             self.slug = slugify(self.title)
         if not self.summary:
-            from blog.templatetags.blog_tags import markdown_to_html
-            self.summary = markdown_to_html(self.body)[0:300]
+            self.summary = self.body[0:350]
         super().save(*args, **kwargs)
 
     def viewed(self):
