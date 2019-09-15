@@ -3,12 +3,28 @@ from django import forms
 from blog.models import Navigation, Category, Article, Link
 
 
+class ArticleForm(forms.ModelForm):
+    class Meta:
+        model = Article
+        fields = '__all__'
+
+    def clean(self):
+        cleaned_data = super(ArticleForm, self).clean()
+        if self.has_changed():
+            changed_data = self.changed_data
+            if 'title' in changed_data or 'author' in changed_data or \
+                    'summary' in changed_data or 'body' in changed_data:
+                import datetime
+                cleaned_data['modify_time'] = datetime.datetime.now()
+        return cleaned_data
+
+
 class NavigationForm(forms.ModelForm):
     category_id = forms.ChoiceField(label='分类', help_text='请导航类型选择分类时选择此项')
     page_id = forms.ChoiceField(label='页面', help_text='请导航类型选择页面时选择此项')
     article_id = forms.ChoiceField(label='文章', help_text='请导航类型选择文章时选择此项')
     link_id = forms.ChoiceField(label='链接', help_text='请导航类型选择链接时选择此项')
-    field_order = ['name', 'type', 'parent', 'instance_id', 'category_id', 'page_id','article_id', 'link_id',
+    field_order = ['name', 'type', 'parent', 'instance_id', 'category_id', 'page_id', 'article_id', 'link_id',
                    'sequence', 'is_show']
 
     class Meta:
@@ -17,13 +33,13 @@ class NavigationForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields['category_id'].choices =\
+        self.fields['category_id'].choices = \
             ((0, '请选择分类'),) + tuple(Category.objects.all().values_list('id', 'name'))
-        self.fields['page_id'].choices =\
+        self.fields['page_id'].choices = \
             ((0, '请选择页面'),) + tuple(Article.objects.filter(type='page').values_list('id', 'title'))
-        self.fields['article_id'].choices =\
+        self.fields['article_id'].choices = \
             ((0, '请选择文章'),) + tuple(Article.objects.filter(type='article').values_list('id', 'title'))
-        self.fields['link_id'].choices =\
+        self.fields['link_id'].choices = \
             ((0, '请选择链接'),) + tuple(Link.objects.all().values_list('id', 'name'))
         self.fields['instance_id'].widget = forms.HiddenInput()
         if 'type' in self.initial and self.initial['type'] != 'blank':

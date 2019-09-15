@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html
 
-from blog.forms import NavigationForm
+from blog.forms import NavigationForm, ArticleForm
 from blog.models import Article, Tag, Category, FriendLink, ExtendsSideBar, BlogSetting, Navigation, Link
 
 
@@ -34,10 +34,10 @@ close_article_comment_status.short_description = '关闭所选文章评论功能
 class ArticleAdmin(admin.ModelAdmin):
     list_per_page = 20
     search_fields = ('body', 'title')
-    # form = ArticleForm
+    form = ArticleForm
     list_display = (
         'id', 'title', 'author', 'link_to_category', 'views', 'status', 'type', 'create_time', 'pub_time',
-        'update_time')
+        'modify_time')
     list_display_links = ('id', 'title')
     list_filter = ('author', 'status', 'type', 'category', 'tags')
     filter_horizontal = ('tags',)
