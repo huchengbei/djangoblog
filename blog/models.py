@@ -1,7 +1,6 @@
 from abc import abstractmethod
 
 from django.conf import settings
-from django.contrib.sites.models import Site
 from django.core.exceptions import ValidationError
 from django.db import models
 
@@ -20,7 +19,7 @@ class BaseModel(models.Model):
         abstract = True
 
     def get_full_url(self):
-        site = Site.objects.get_current().domain
+        site = BlogSetting.get_site_url()
         url = "https://{site}{path}".format(site=site, path=self.get_absolute_url())
         return url
 
@@ -273,6 +272,7 @@ class ExtendsSideBar(models.Model):
 
 class BlogSetting(models.Model):
     site_name = models.CharField('网站名称', max_length=200, default='')
+    site_url = models.URLField('网站地址' )
     site_description = models.CharField('网站描述', max_length=1000, default='')
     site_seo_description = models.CharField('网站SEO描述', max_length=1000, blank=True)
     site_keywords = models.CharField('网站关键字', max_length=1000, default='')
@@ -304,5 +304,9 @@ class BlogSetting(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
+
+    @staticmethod
+    def get_site_url():
+        return BlogSetting.objects.first().site_url
 
 

@@ -4,7 +4,7 @@ import markdown
 from django import template
 from django.template.defaultfilters import stringfilter
 
-from blog.models import Article, Category, Tag, ExtendsSideBar, FriendLink
+from blog.models import Article, Category, Tag, ExtendsSideBar, FriendLink, BlogSetting
 
 register = template.Library()
 
@@ -101,3 +101,8 @@ def get_friend_link_list():
 @register.simple_tag(name='get_extends_sidebar_list')
 def get_extends_sidebar_list():
     return ExtendsSideBar.objects.filter(is_show=True)
+
+
+@register.simple_tag(name='get_site_info')
+def get_site_info():
+    return BlogSetting.objects.first()

@@ -1,7 +1,6 @@
 from django.contrib import admin
 
 # Register your models here.
-from django.contrib.sites.models import Site
 from django.urls import reverse
 from django.utils.html import format_html
 
@@ -57,7 +56,7 @@ class ArticleAdmin(admin.ModelAdmin):
         if obj:
             return obj.get_absolute_url()
         else:
-            return Site.objects.get_current().domain
+            return BlogSetting.get_site_url()
 
 
 @admin.register(Navigation)

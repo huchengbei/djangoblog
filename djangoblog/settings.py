@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
     'account.apps.AccountConfig',
     'blog.apps.BlogConfig',
     'comment.apps.CommentConfig',
@@ -135,4 +134,3 @@ STATICFILES_DIRS = [
 
 # Custom Settings
 AUTH_USER_MODEL = 'account.User'
-SITE_ID = 1

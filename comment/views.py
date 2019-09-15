@@ -4,7 +4,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.views.generic import FormView
 
-from blog.models import Article
+from blog.models import Article, BlogSetting
 from comment.forms import CommentForm
 
 
@@ -18,8 +18,7 @@ class PostCommentView(FormView):
         if article:
             return HttpResponseRedirect(article.get_absolute_url())
         else:
-            from django.contrib.sites.models import Site
-            site = Site.objects.get_current().domain
+            site = BlogSetting.get_site_url()
             url = "https://{site}".format(site=site)
             return HttpResponseRedirect(url)
 

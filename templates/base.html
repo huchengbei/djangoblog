@@ -1,4 +1,6 @@
 {% load static %}
+{% load blog_tags %}
+{% get_site_info as site %}
 <!doctype html>
 <html>
 <head>
@@ -7,7 +9,7 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>BLOG | Amaze UI Examples</title>
+    <title>BLOG | {{ site.site_name }}</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <link rel="icon" type="image/png" href=" {% static 'blog/i/favicon.png' %}">
