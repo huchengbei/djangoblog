@@ -1,0 +1,33 @@
+{% load comment_tags %}
+{% if not form %}
+    {% get_comment_form article as form %}
+{% endif %}
+<form class="am-form am-g comment-form" method="post" action="{% url 'comment:post_comment' %}">
+    <h3 class="blog-comment">发表评论</h3>
+    {% csrf_token %}
+    <fieldset>
+        {{ form.article }}
+        <div class="am-form-group am-u-sm-4 blog-clear-left">
+{#            <input type="text" class="" placeholder="名字">#}
+            {{ form.username }}
+            {{ form.errors.username }}
+        </div>
+        <div class="am-form-group am-u-sm-4">
+{#            <input type="email" class="" placeholder="邮箱">#}
+            {{ form.email }}
+            {{ form.errors.email }}
+        </div>
+        <div class="am-form-group am-u-sm-4 blog-clear-right">
+{#            <input type="text" class="" placeholder="网站">#}
+            {{ form.website }}
+            {{ form.errors.website }}
+        </div>
+        <div class="am-form-group">
+{#            <textarea class="" rows="5" placeholder="一字千金"></textarea>#}
+            {{ form.content }}
+            {{ form.errors.content }}
+        </div>
+        <p><button type="submit" class="am-btn am-btn-default">发表评论</button></p>
+    </fieldset>
+</form>
+<hr>

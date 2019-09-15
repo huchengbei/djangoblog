@@ -1,0 +1,17 @@
+{% load blog_tags %}
+{% load comment_tags %}
+<section id="comments" class="themeform">
+    <a href="#commentlist-container">
+        <i class="fa fa-comments-o"></i><h3 class="blog-comment">评论<span>{{ comment_count }}</span></h3></a>
+{% get_article_comment_list article.id as comment_list %}
+    {% if comment_list %}
+            <div id="commentlist-container" class="comment-tab" style="display: block;">
+                <ol class="commentlist">
+                    {% get_article_comment_list article.id as comment_list %}
+                    {% for comment_item in comment_list %}
+                            {% include "comment/comment_item.html" %}
+                    {% endfor %}
+                </ol><!--/.commentlist-->
+            </div>
+    {% endif %}
+</section>

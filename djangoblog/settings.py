@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'account.apps.AccountConfig',
     'blog.apps.BlogConfig',
+    'comment.apps.CommentConfig',
 ]
 
 MIDDLEWARE = [
