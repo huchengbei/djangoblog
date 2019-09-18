@@ -49,6 +49,7 @@ class Command(BaseCommand):
                         article.modify_time = metas['updated'][0]
                     else:
                         article.modify_time = article.pub_time
+                    article.save()
                     if 'tags' in metas and metas['tags']:
                         for tag_name in metas['tags']:
                             tag = Tag.objects.filter(name=tag_name).first()
