@@ -48,5 +48,16 @@
 <![endif]-->
 <script src="{% static 'blog/js/amazeui.min.js' %}"></script>
 <script src="{% static 'blog/js/app.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.0/katex.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.0/katex.min.css" />
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.0/contrib/auto-render.min.js"
+        onload='renderMathInElement(document.body, {
+                                                delimiters: [
+                                                    {left: "$$", right: "$$", display: true},
+                                                    {left: "$", right: "$", display: false}
+                                                ]
+                                                }
+            );'>
+    </script>
 </body>
 </html>
