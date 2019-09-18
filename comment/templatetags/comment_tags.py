@@ -16,4 +16,9 @@ def get_article_comment_list(article_id, parent=None):
 def get_comment_form(article):
     form = CommentForm()
     form.fields['article'].initial = article
-    return form
+
+
+@register.simple_tag(name='get_comment_count')
+def get_comment_count(article):
+    return Comment.objects.filter(article=article).count()
+

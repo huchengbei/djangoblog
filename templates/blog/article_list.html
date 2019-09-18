@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load blog_tags %}
+{% load comment_tags %}
 {% block content %}
     <!-- content srart -->
     <div class="am-g am-g-fixed blog-fixed">
@@ -16,6 +17,8 @@
                             </span>
                             <span> @{{ article.author }} &nbsp;</span>
                             <span> 阅读({{ article.views }}) &nbsp;</span>
+                            <span> 评论({{ comment_count }}) &nbsp;</span>
+                            <span>{{ article.pub_time|date:'Y/m/d' }}</span>-
                             <span>{{ article.pub_time|date:'Y/m/d' }} &nbsp; </span>
                             <span class="am-icon-tags"> &nbsp;
                                 {% for tag in article.tags.all %}
