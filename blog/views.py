@@ -12,8 +12,11 @@ class BaseArticlesListView(ListView):
     model = Article
     template_name = 'blog/article_list.html'
     context_object_name = 'article_list'
-    paginate_by = BlogSetting.get_settings().paginate_by
     page_kwarg = 'page'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.paginate_by = BlogSetting.get_settings().paginate_by
 
     def get_queryset(self):
         articles = super(BaseArticlesListView, self).get_queryset()
