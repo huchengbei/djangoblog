@@ -29,6 +29,11 @@ class Comment(BaseModel):
 
     class Meta:
         ordering = ['-create_time']
+        verbose_name = '评论'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.content
 
     def get_absolute_url(self):
         return self.article.get_absolute_url() + '#comment-' + str(self.id)
