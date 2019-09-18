@@ -21,7 +21,9 @@
               </span>
           </p>
         </div>
-          {{ article.body|markdown_to_html|safe }}
+        <div class="am-article-bd blog-entry-text">
+            {{ article.body|markdown_to_html|safe }}
+         <div>
       </article>
         
         <hr>
