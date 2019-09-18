@@ -52,6 +52,8 @@ class Command(BaseCommand):
                     if 'tags' in metas and metas['tags']:
                         for tag_name in metas['tags']:
                             tag = Tag.objects.filter(name=tag_name).first()
-                            if tag:
-                                article.tags.add(tag)
+                            if not tag:
+                                tag = Tag(name=category_name)
+                                tag.save()
+                            article.tags.add(tag)
                     article.save()
