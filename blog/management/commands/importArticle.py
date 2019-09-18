@@ -53,7 +53,7 @@ class Command(BaseCommand):
                         for tag_name in metas['tags']:
                             tag = Tag.objects.filter(name=tag_name).first()
                             if not tag:
-                                tag = Tag(name=category_name)
+                                tag = Tag(name=tag_name)
                                 tag.save()
                             article.tags.add(tag)
                     article.save()
