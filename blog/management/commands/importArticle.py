@@ -52,9 +52,10 @@ class Command(BaseCommand):
                     article.save()
                     if 'tags' in metas and metas['tags']:
                         for tag_name in metas['tags']:
-                            tag = Tag.objects.filter(name=tag_name).first()
-                            if not tag:
-                                tag = Tag(name=tag_name)
-                                tag.save()
-                            article.tags.add(tag)
+                            if tag_name:
+                                tag = Tag.objects.filter(name=tag_name).first()
+                                if not tag:
+                                    tag = Tag(name=tag_name)
+                                    tag.save()
+                                article.tags.add(tag)
                     article.save()
