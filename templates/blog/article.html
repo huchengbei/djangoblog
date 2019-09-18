@@ -13,6 +13,7 @@
               <span><a href="{{ article.category.get_absolute_url }}" class="blog-color">
                       {{ article.category.name }} &nbsp;</a></span>-
               <span><a href="#">@{{ article.author }} &nbsp;</a></span>-
+              <span> 阅读({{ article.views }}) &nbsp;</span>
               <span>{{ article.pub_time|date:'Y/m/d' }}</span>-
               <span class="am-icon-tags"> &nbsp;
                   {% for tag in article.tags.all %}
