@@ -80,11 +80,20 @@ class Article(BaseModel):
         breadcrumb = list(map(lambda c: (c.name, c.get_absolute_url()), breads))
         return breadcrumb
 
+    def get_summary(self):
+        import markdown
+        md = markdown.Markdown(extensions=['meta'])
+        md.convert(self.body)
+        lines = md.lines
+        from functools import reduce
+        body = reduce(lambda x, y: x + '\n' + y, lines)
+        return body[0:350]
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)[0:50]
         if not self.summary:
-            self.summary = self.body[0:350]
+            self.summary = self.get_summary()
         super().save(*args, **kwargs)
 
     def viewed(self):

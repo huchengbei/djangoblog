@@ -29,9 +29,7 @@ class Command(BaseCommand):
                     file = open(full_path, encoding='utf-8').read()
                     md.convert(file)
                     metas = md.Meta
-                    lines = md.lines
-                    from functools import reduce
-                    body = reduce(lambda x, y: x + '\n' + y, lines)
+                    body = file
                     if 'categories' in metas and metas['categories'][0]:
                         category_name = metas['categories'][0]
                     else:
