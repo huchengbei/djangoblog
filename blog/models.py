@@ -282,6 +282,7 @@ class BlogSetting(models.Model):
 
     sidebar_article_num = models.IntegerField('侧边栏文章数目', default=10)
     sidebar_comment_num = models.IntegerField('侧边栏评论数目', default=10)
+    paginate_by = models.IntegerField('每页展示文章数', default=10)
 
     ads_content_codes = models.TextField('广告代码', max_length=2000, blank=True, default='', help_text='广告HTML代码')
 
@@ -304,6 +305,10 @@ class BlogSetting(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
+
+    @staticmethod
+    def get_settings():
+        return BlogSetting.objects.first()
 
     @staticmethod
     def get_site_url():

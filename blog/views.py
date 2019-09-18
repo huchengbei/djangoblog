@@ -5,13 +5,15 @@ from django.shortcuts import render
 # Create your views here.
 from django.views.generic import ListView, DetailView
 
-from blog.models import Article
+from blog.models import Article, BlogSetting
 
 
 class BaseArticlesListView(ListView):
     model = Article
     template_name = 'blog/index.html'
     context_object_name = 'article_list'
+    paginate_by = BlogSetting.get_settings().paginate_by
+    page_kwarg = 'page'
 
     def get_queryset(self):
         articles = super(BaseArticlesListView, self).get_queryset()
