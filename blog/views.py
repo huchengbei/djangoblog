@@ -10,7 +10,7 @@ from blog.models import Article, BlogSetting
 
 class BaseArticlesListView(ListView):
     model = Article
-    template_name = 'blog/index.html'
+    template_name = 'blog/article_list.html'
     context_object_name = 'article_list'
     paginate_by = BlogSetting.get_settings().paginate_by
     page_kwarg = 'page'
