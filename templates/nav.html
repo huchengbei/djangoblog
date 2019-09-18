@@ -6,11 +6,12 @@
         {% get_nav_dict as nav_dict %}
         {% for key, value in nav_dict.items %}
             {% if value %}
-                <li class="am-dropdown" data-am-dropdown>
-                    <a class="am-dropdown-toggle" data-am-dropdown-toggle href="{{ key.get_absolute_url }}">
+                <li class="am-dropdown" onmouseover="$('li.am-dropdown').removeClass('am-active');
+                $(this).addClass('am-active')" data-am-dropdown>
+                    <a data-am-dropdown-toggle href="{{ key.get_absolute_url }}">
                         {{ key.name }} <span class="am-icon-caret-down"></span>
                     </a>
-                    <ul class="am-dropdown-content">
+                    <ul class="am-dropdown-content" onmouseout="$('li.am-dropdown').removeClass('am-active');">
                         {% for k, v in value.items %}
                             <li><a href="{{ k.get_absolute_url }}">{{ k }}</a></li>
                         {% endfor %}
