@@ -107,3 +107,14 @@ def get_extends_sidebar_list():
 @register.simple_tag(name='get_site_info')
 def get_site_info():
     return BlogSetting.objects.first()
+
+
+@register.filter()
+def label_with_classes(label, class_name):
+    return label.label_tag(attrs={'class': class_name})
+
+
+@register.filter()
+def widget_with_classes(widget, class_name):
+    return widget.as_widget(attrs={'class': class_name})
+
