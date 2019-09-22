@@ -73,6 +73,14 @@ class ArchiveView(BaseArticlesListView):
                 self.type = type
                 self.year = year
                 self.month = month
+                self.article_count = 0
+
+            def append(self, obj) -> None:
+                super().append(obj)
+                if self.type == 'all' or self.type == 'year':
+                    self.article_count += obj.article_count
+                if self.type == 'month':
+                    self.article_count += 1
 
             def __str__(self):
                 if self.type == 'year':
