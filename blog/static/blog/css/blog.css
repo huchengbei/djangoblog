@@ -1,0 +1,25 @@
+/*!
+ * Start Bootstrap - Blog
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT
+ */
+body {
+    padding-top: 56px;
+}
+
+.page-link {
+    color: black;
+}
+a {
+    color: #212529;
+    transition: all 0.2s;
+}
+
+a:focus, a:hover {
+    color: #0085A1;
+}
+
+img {
+    max-width: 100%;
+}
+
