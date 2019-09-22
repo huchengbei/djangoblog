@@ -28,4 +28,4 @@ class PostCommentView(FormView):
     def form_valid(self, form):
         comment = form.save(False)
         comment.save()
-        return HttpResponseRedirect("{}#div-comment-{}".format(comment.article.get_absolute_url(), comment.id))
+        return HttpResponseRedirect("{}#comment-{}".format(comment.article.get_absolute_url(), comment.id))
