@@ -63,7 +63,8 @@ def markdown_to_html(body):
 
 
 @register.simple_tag(name='get_article_list')
-def get_article_list(sort=None, num=None):
+def get_article_list(sort=None):
+    num = get_site_info().sidebar_article_num
     now = datetime.datetime.now()
     articles = Article.objects.filter(status='published', type='article', pub_time__lte=now)
     if sort:
