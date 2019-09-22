@@ -108,11 +108,23 @@ class Article(BaseModel):
         url_pattern = 'admin:%s_%s_change' % (self._meta.app_label, self._meta.model_name)
         return reverse(url_pattern, args=(self.id,))
 
+    def has_pre(self):
+        pre_article = Article.objects.filter(pub_time__lt=self.pub_time, status='published', type=self.type)\
+            .order_by('-pub_time').first()
+        return True if pre_article else False
+
+    def has_next(self):
+        next_article = Article.objects.filter(pub_time__gt=self.pub_time, status='published', type=self.type)\
+            .order_by('pub_time').first()
+        return True if next_article else False
+
     def get_pre(self):
-        return Article.objects.filter(id__lt=self.id, status='published', type=self.type).order_by('-id').first()
+        return Article.objects.filter(pub_time__lt=self.pub_time, status='published', type=self.type)\
+            .order_by('-pub_time').first()
 
     def get_next(self):
-        return Article.objects.filter(id__gt=self.id, status='published', type=self.type).order_by('id').first()
+        return Article.objects.filter(pub_time__gt=self.pub_time, status='published', type=self.type)\
+            .order_by('pub_time').first()
 
 
 class Category(BaseModel):
@@ -281,7 +293,7 @@ class ExtendsSideBar(models.Model):
 
 class BlogSetting(models.Model):
     site_name = models.CharField('网站名称', max_length=200, default='')
-    site_url = models.URLField('网站地址' )
+    site_url = models.URLField('网站地址')
     site_description = models.CharField('网站描述', max_length=1000, default='')
     site_seo_description = models.CharField('网站SEO描述', max_length=1000, blank=True)
     site_keywords = models.CharField('网站关键字', max_length=1000, default='')
@@ -322,5 +334,3 @@ class BlogSetting(models.Model):
     @staticmethod
     def get_site_url():
         return BlogSetting.objects.first().site_url
-
-
