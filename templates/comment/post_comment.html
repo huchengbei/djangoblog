@@ -1,0 +1,34 @@
+{% load blog_tags %}
+{% load comment_tags %}
+{% if not form %}
+    {% get_comment_form article as form %}
+{% endif %}
+<div class="card my-4" id="post-comment">
+    <h5 class="card-header">发表评论:</h5>
+    <div class="card-body">
+        <form method="post" action="{% url 'comment:post_comment' %}">
+            {% csrf_token %}
+            {{ form.article }}
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    {{ form.username|widget_with_classes:'form-control' }}
+                    {{ form.username.errors }}
+                </div>
+                <div class="form-group col-md-4">
+                    {{ form.email|widget_with_classes:'form-control' }}
+                    {{ form.email.errors }}
+                </div>
+                <div class="form-group col-md-4">
+                    {{ form.website|widget_with_classes:'form-control'}}
+                    {{ form.website.errors }}
+                </div>
+            </div>
+            <div class="form-group">
+                {#                <textarea class="form-control" rows="3"></textarea>#}
+                {{ form.content|widget_with_classes:'form-control' }}
+                {{ form.content.errors }}
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>

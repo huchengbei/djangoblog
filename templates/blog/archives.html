@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load blog_tags %}
+
+{% block page_content %}
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row my-4">
+
+            <!-- Post Content Column -->
+            <div class="col-lg-8">
+
+                <!-- Title -->
+                <h2 class="text-center">— 归档 —</h2>
+
+                <hr>
+                {% for archives_year in archives %}
+                    <h4 class="text">{{ archives_year }}年<small>({{ archives_year.article_count }}篇)</small></h4>
+                    {% for archives_month in archives_year %}
+                        <div class="card mb-4">
+                            <div class="card-header pb-0">
+                                <h5>{{ archives_month }}月<small>({{ archives_month.article_count }}篇)</small></h5>
+                            </div>
+                            <div class="card-body py-2">
+                                {% for article in archives_month %}
+                                    <div class="row">
+                                        <div class="col-1 text-right px-0">{{ article.pub_time.day }}日</div>
+                                        <div class="col-8 offset-1"><a href="{{ article.get_absolute_urlt  }}">{{ article }}</a></div>
+                                        <div class="col-2 text-right">{{ article.views }} Views</div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+
+            <!-- Sidebar Widgets Column -->
+            {% include 'blog/side_bar.html' %}
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+
+{% endblock %}

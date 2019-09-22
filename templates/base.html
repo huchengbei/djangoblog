@@ -1,0 +1,53 @@
+{% load static %}
+{% load blog_tags %}
+{% get_site_info as site %}
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Blog - {{ site.site_name }}</title>
+    <link rel="icon" type="image/png" href=" {% static 'img/favicon.png' %}">
+    <!-- Bootstrap core CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'blog/css/blog.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- Navigation -->
+{% include 'nav.html' %}
+<!-- Navigation -->
+
+<!-- Page Content -->
+{% block page_content %}
+{% endblock %}
+<!-- Page Content -->
+
+<!-- Footer -->
+{% include 'footer.html' %}
+<!-- Footer -->
+
+<!-- Bootstrap core JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.0/katex.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.0/katex.min.css" />
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.0/contrib/auto-render.js"
+        onload='renderMathInElement(document.body, {delimiters: [
+              {left: "$$", right: "$$", display: true},
+              {left: "$", right: "$", display: false}]}
+            );'>
+</script>
+
+</body>
+</html>

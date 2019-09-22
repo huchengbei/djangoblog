@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load blog_tags %}
+{% load comment_tags %}
+
+{% block page_content %}
+    <div class="container">
+        <div class="row my-4">
+
+            <!-- Post Content Column -->
+            <div class="col-md-8">
+
+                <!-- Title -->
+                <h1 class="">{{ article }}</h1>
+
+                <!-- Author -->
+                <p class="lead">
+                    by
+                    <a href="#">{{ article.author }}</a>
+                </p>
+
+                <hr>
+
+                <!-- Date/Time -->
+                <p>发表于: {{ article.pub_time }}</p>
+
+                <hr>
+
+                <!-- Preview Image -->
+                {#        <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">#}
+                {#        <hr>#}
+
+                <!-- Post Content -->
+                {{ article.body|markdown_to_html|safe }}
+
+
+                <hr>
+                <!-- Pager -->
+                <div class="clearfix mb-4">
+                    {% if article.has_pre %}
+                        <div class="float-left pl-3" style="font-size: large"><a href="{{ article.get_pre.get_absolute_url }}">&laquo; 上一篇</a></div>
+                    {% endif %}
+                    {% if article.has_next %}
+                        <div class="float-right pr-3" style="font-size: large"><a href="{{ article.get_next.get_absolute_url }}">下一篇 &raquo;</a></div>
+                    {% endif %}
+                </div>
+                <hr>
+
+                <!-- Comments Form -->
+                {% include 'comment/post_comment.html' %}
+
+                <!-- Comment list-->
+                {% include 'comment/comment_list.html' %}
+
+
+            </div>
+
+            <!-- Sidebar Widgets Column -->
+            {% include 'blog/side_bar.html' %}
+
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+{% endblock %}

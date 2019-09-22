@@ -1,0 +1,9 @@
+{% load comment_tags %}
+<!-- Single Comment -->
+{% get_article_comment_list article.id as comment_list %}
+{% if comment_list %}
+    {% get_article_comment_list article.id as comment_list %}
+    {% for comment_item in comment_list %}
+        {% include "comment/comment_item_tree.html" %}
+    {% endfor %}
+{% endif %}

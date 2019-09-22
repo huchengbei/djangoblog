@@ -1,0 +1,8 @@
+<div class="media my-4">
+    {#    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">#}
+    <i class="fa fa-user-circle fa-3x my-1 mr-3"></i>
+    <div class="media-body">
+        <h5 class="mt-0" id="comment-{{ comment_item.id }}">{{ comment_item.username }}</h5>
+        {{ comment_item.content }}
+    </div>
+</div>
