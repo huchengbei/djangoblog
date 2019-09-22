@@ -38,7 +38,7 @@
             <div class="card-body">
                 <ul class="list-unstyled ml-1 mb-0">
                     {% for category in category_list %}
-                        <li><a href="{{ category.get_absolute_url }}">{{ category }}({{ category_list.article__count }})</a></li>
+                        <li><a href="{{ category.get_absolute_url }}">{{ category }}({{ category.article__count }})</a></li>
                         <hr class="my-3">
                     {% endfor %}
                 </ul>
