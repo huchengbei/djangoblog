@@ -15,4 +15,5 @@ class CommentForm(forms.ModelForm):
         self.fields['email'].widget.attrs['placeholder'] = "邮箱"
         self.fields['website'].widget.attrs['placeholder'] = "网站"
         self.fields['content'].widget.attrs['placeholder'] = "一字千金"
+        self.fields['content'].widget.attrs['rows'] = "5"
         self.fields['article'].widget.attrs['style'] = 'display:none'
