@@ -24,7 +24,7 @@ class NavigationForm(forms.ModelForm):
     page_id = forms.ChoiceField(label='页面', help_text='请导航类型选择页面时选择此项')
     article_id = forms.ChoiceField(label='文章', help_text='请导航类型选择文章时选择此项')
     link_id = forms.ChoiceField(label='链接', help_text='请导航类型选择链接时选择此项')
-    field_order = ['name', 'type', 'parent', 'instance_id', 'category_id', 'page_id', 'article_id', 'link_id',
+    field_order = ['name','icon', 'type', 'parent', 'instance_id', 'category_id', 'page_id', 'article_id', 'link_id',
                    'sequence', 'is_show']
 
     class Meta:
