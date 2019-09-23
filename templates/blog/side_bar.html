@@ -70,7 +70,7 @@
             <div class="card-body">
                 <ul class="list-unstyled ml-1 mb-0">
                     {% for article in article_list %}
-                        <li><a href="{{ article.get_absolute_url }}">{{ article }}-{{ article.pub_time|date:'Y/m/d' }}</a></li>
+                        <li><a href="{{ article.get_absolute_url }}">{{ article }}-{{ article.views }}</a></li>
                         <hr class="my-3">
                     {% endfor %}
                 </ul>
