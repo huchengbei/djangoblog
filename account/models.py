@@ -22,3 +22,7 @@ class User(AbstractUser):
         verbose_name_plural = verbose_name
         ordering = ['-id']
 
+    def __str__(self):
+        return self.nickname or self.get_username()
+
+
