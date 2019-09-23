@@ -9,6 +9,13 @@ class UserCreationForm(BaseUserCreationForm):
         model = get_user_model()
         fields = ['username', 'email']
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs['placeholder'] = "用户名"
+        self.fields['email'].widget.attrs['placeholder'] = "邮箱"
+        self.fields['password1'].widget.attrs['placeholder'] = "密码"
+        self.fields['password2'].widget.attrs['placeholder'] = "确认密码"
+
 
 class UserChangeForm(BaseUserChangeForm):
     class Meta:
@@ -17,4 +24,8 @@ class UserChangeForm(BaseUserChangeForm):
 
 
 class LoginForm(AuthenticationForm):
-    pass
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs['placeholder'] = "用户名"
+        self.fields['password'].widget.attrs['placeholder'] = "密码"
