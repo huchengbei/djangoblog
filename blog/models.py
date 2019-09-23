@@ -48,7 +48,7 @@ class Article(BaseModel):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='作者', on_delete=models.PROTECT)
     pub_time = models.DateTimeField('发布时间', blank=True)
     modify_time = models.DateTimeField('更改时间', blank=True)
-    summary = models.TextField('摘要', max_length=400, blank=True, help_text='文章摘要置空默认提取文字内容前部分文字')
+    summary = models.TextField('摘要', max_length=200, blank=True, help_text='文章摘要置空默认提取文字内容前部分文字')
     body = models.TextField('正文', help_text='支持markdown')
     comment_type = models.CharField('评论状态', max_length=5, choices=COMMENT_STATUS, default='open')
     views = models.PositiveIntegerField('浏览量', default=0)
@@ -87,7 +87,7 @@ class Article(BaseModel):
         lines = md.lines
         from functools import reduce
         body = reduce(lambda x, y: x + '\n' + y, lines)
-        return body[0:350]
+        return body[0:150]
 
     def save(self, *args, **kwargs):
         if not self.slug:
