@@ -16,13 +16,13 @@
                 {% for key, value in nav_list.items %}
                     {% if value %}
                         <li class="ml-1 dropdown">
-                      <span class="nav-link dropdown-toggle" href="{{ key.get_absolute_url }}" id="dropdownMenu-{{ key.id }}"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          {% if key.icon %}
-                              <i class="fa {{ key.icon }}"></i>
-                          {% endif %}
-                          &nbsp;{{ key.name }}
-                      </span>
+                            <a class="nav-link dropdown-toggle" href="{{ key.get_absolute_url }}" id="dropdownMenu-{{ key.id }}"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {% if key.icon %}
+                                    <i class="fa {{ key.icon }}"></i>
+                                {% endif %}
+                                &nbsp;{{ key.name }}
+                            </a>
                             <div class="dropdown-menu bg-dark" aria-labelledby="dropdownMenu-{{ key.id }}">
                                 {% for k, v in value.items %}
                                     <a class="dropdown-item text-light" href="{{ k.get_absolute_url }}">{{ k }}</a>
