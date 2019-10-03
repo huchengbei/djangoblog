@@ -23,7 +23,6 @@ def get_comment_form(article, user):
         form.fields['email'].initial = user.email
         form.fields['website'].widget.attrs['hidden'] = 'true'
         form.fields['website'].initial = user.link
-    print(user)
     return form
 
 
