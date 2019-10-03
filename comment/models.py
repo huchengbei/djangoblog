@@ -24,7 +24,7 @@ class Comment(BaseModel):
     parent = models.ForeignKey('self', verbose_name='父评论', blank=True, null=True, on_delete=models.SET_NULL)
     username = models.CharField(verbose_name='名字', max_length=20)
     email = models.EmailField(verbose_name='邮箱')
-    website = models.URLField(verbose_name='网站')
+    website = models.URLField(verbose_name='网站', blank=True, null=True)
     content = models.TextField(verbose_name='内容')
 
     class Meta:
