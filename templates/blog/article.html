@@ -25,8 +25,10 @@
                 <hr class="mt-1">
 
                 <!-- Preview Image -->
-                {#        <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">#}
-                {#        <hr>#}
+                {% if article.image_link %}
+                    <img class="img-fluid rounded" src="{{ article.image_link }}" alt="">
+                    <hr>
+                {% endif %}
 
                 <!-- Post Content -->
                 {{ article.body|markdown_to_html|safe }}
