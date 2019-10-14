@@ -16,6 +16,10 @@ a {
     transition: all 0.2s;
 }
 
+.card-footer a{
+    color: #6C757D;
+}
+
 a:focus, a:hover {
     color: #0085A1;
 }

@@ -48,10 +48,10 @@
                         </div>
                         <div class="card-footer text-muted">
                             <span>日期: {{ article.pub_time }}</span>&nbsp;&nbsp;
-                            <span>分类: {{ article.category }}</span>&nbsp;&nbsp;
+                            <span>分类: <a href="{{ article.get_absolute_url }}">{{ article.category }}</a></span>&nbsp;&nbsp;
                             <span>阅读({{ article.views }})</span>&nbsp;&nbsp;
                             {% get_comment_count article as comment_count %}
-                            <span>评论({{ comment_count }})</span>&nbsp;&nbsp;
+                            <span><a href="{{ article.get_absolute_url }}#comments">评论({{ comment_count }})</a></span>&nbsp;&nbsp;
                         </div>
                     </div>
                 {% endfor %}
