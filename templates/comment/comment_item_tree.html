@@ -1,11 +1,20 @@
 {% load comment_tags %}
 <hr class="my-1">
-<div class="media my-4">
+<div class="media mt-2">
     {#    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">#}
     <i class="fa fa-user-circle fa-3x my-1 mr-3"></i>
     <div class="media-body">
-        <h5 class="mt-0" id="comment-{{ comment_item.id }}">{{ comment_item.username }}&nbsp;<small>{{ comment_item.create_time }}</small></h5>
+        <h5 class="mt-0" id="comment-{{ comment_item.id }}">{{ comment_item.username }}</h5>
         {{ comment_item.content }}
+        <br>
+        <div class="comment-item-bottom text-right mb-2 pr-3">
+            <span>{{ comment_item.create_time }}</span>
+            <span><a data-toggle="collapse" href="#collapse{{ comment_item.id }}" role="button"
+                     aria-expanded="false" aria-controls="collapse{{ comment_item.id }}">回复</a></span>
+            <div class="collapse" id="collapse{{ comment_item.id }}" >
+                {% include 'comment/post_comment_body.html' %}
+            </div>
+        </div>
         {% get_article_comment_list article.id comment_item as comment_list %}
         {% for comment_item in comment_list %}
             {% include "comment/comment_item_tree.html" %}

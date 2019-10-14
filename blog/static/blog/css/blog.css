@@ -28,3 +28,15 @@ img {
     max-width: 100%;
 }
 
+.comment-item-bottom {
+    color: #6C757D;
+}
+
+.comment-item-bottom a{
+    color: #00a67c;
+}
+
+.comment-item-bottom a:focus, a:hover{
+    text-decoration : none;
+    color: #dd1144;
+}
