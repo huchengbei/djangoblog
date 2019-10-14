@@ -38,12 +38,12 @@
                                     </div>
                                     <div class="col-md-8 col-sm-12">
                                         <div class="card-text">{{ article.summary|markdown_to_html|safe }}</div>
-                                        <a href="{{ article.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
+{#                                        <a href="{{ article.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>#}
                                     </div>
                                 </div>
                             {% else %}
                                 <div class="card-text">{{ article.summary|markdown_to_html|safe }}</div>
-                                <a href="{{ article.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
+{#                                <a href="{{ article.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>#}
                             {% endif %}
                         </div>
                         <div class="card-footer text-muted">
