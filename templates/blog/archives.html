@@ -26,7 +26,7 @@
                                 {% for article in archives_month %}
                                     <div class="row">
                                         <div class="col-1 text-right px-0">{{ article.pub_time.day }}日</div>
-                                        <div class="col-8 offset-1"><a href="{{ article.get_absolute_urlt  }}">{{ article }}</a></div>
+                                        <div class="col-8 offset-1"><a href="{{ article.get_absolute_url  }}">{{ article }}</a></div>
                                         <div class="col-2 text-right">{{ article.views }} Views</div>
                                     </div>
                                 {% endfor %}
