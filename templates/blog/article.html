@@ -2,6 +2,9 @@
 {% load blog_tags %}
 {% load comment_tags %}
 
+{% block site_title %}
+    Blog - {{ article }} - {{ site.site_name }}
+{% endblock %}
 {% block page_content %}
     <div class="container">
         <div class="row my-4">

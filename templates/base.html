@@ -8,7 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Blog - {{ site.site_name }}</title>
+    <title>
+        {% block site_title %}
+            Blog - {{ site.site_name }}
+        {% endblock %}
+    </title>
     <link rel="icon" type="image/png" href=" {% static 'img/favicon.png' %}">
     <!-- Bootstrap core CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
