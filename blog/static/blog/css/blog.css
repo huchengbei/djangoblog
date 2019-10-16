@@ -28,6 +28,20 @@ img {
     max-width: 100%;
 }
 
+.article-meta {
+    color: #6C757D;
+    font-size: small;
+}
+
+.article-meta>span {
+    margin-right: 10px;
+    margin-top: 5px;
+}
+
+.article-meta a{
+    color: #337AB7;
+}
+
 .comment-item-bottom {
     color: #6C757D;
 }

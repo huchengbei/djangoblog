@@ -12,17 +12,21 @@
                 <!-- Title -->
                 <h1 class="">{{ article }}</h1>
 
-                <!-- Author -->
-                <p class="lead">
-                    by
-                    <a href="#">{{ article.author }}</a>
-                </p>
+                <div class="article-meta">
+                    <span>日期: {{ article.pub_time }}</span>
+                    <span>作者: {{ article.author }}</span>
+                    <span>分类: <a href="{{ article.category.get_absolute_url }}">{{ article.category }}</a></span>
+                    <span>标签:
+                        {% for tag in article.tags.all %}
+                            <a href="{{ tag.get_absolute_url }}">{{ tag }}</a>
+                        {% endfor %}
+                </span>
+                    <span>阅读({{ article.views }})</span>
+                    {% get_comment_count article as comment_count %}
+                    <span>评论(<a href="#comments">{{ comment_count }}</a>)</span>
+                </div>
 
-
-                <!-- Date/Time -->
-                <p>发表于: {{ article.pub_time }}</p>
-
-                <hr class="mt-1">
+                <hr>
 
                 <!-- Preview Image -->
                 {% if article.image_link %}
