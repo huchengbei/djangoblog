@@ -1,0 +1,29 @@
+{% load oauth_tags %}
+<hr>
+<div class="mt-0">
+    <p style="font-size: large">
+        第三方登录:
+    </p>
+    {% get_oauth_app_list as app_list %}
+    <div>
+        {% for app in app_list %}
+            <span class="mx-2">
+                <a href="{{ app.get_auth_url }}&redirect_uri={%  get_redirect_url app.get_callback_url to_url app.slug %}">
+                    <i class="{{ app.icon }} fa-2x"></i></a>
+            </span>
+        {% endfor %}
+        <span class="mx-2">
+            <a href=""><i class="fab fa-weibo fa-2x"></i></a>
+        </span>
+        <span class="mx-2">
+            <a href=""><i class="fab fa-weixin fa-2x"></i></a>
+        </span>
+        <span class="mx-2">
+            <a href=""><i class="fab fa-qq fa-2x"></i></a>
+        </span>
+        <br>
+        <div class="font-weight-bold" style="color: #dd1144;">
+            {{ oauth_error_message }}
+        </div>
+    </div>
+</div>
