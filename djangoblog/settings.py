@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'blog.apps.BlogConfig',
     'comment.apps.CommentConfig',
+    'oauth.apps.OAuthConfig'
 ]
 
 MIDDLEWARE = [

@@ -13,7 +13,7 @@ class User(AbstractUser):
                                  default='avatar/default.png',
                                  verbose_name='头像',
                                  processors=[ResizeToFill(80, 80)])
-    email = models.EmailField('邮件地址')
+    email = models.EmailField('邮件地址', blank=True, null=True)
     create_time = models.DateTimeField('创建时间', auto_now_add=True)
     update_time = models.DateTimeField('修改时间', auto_now=True)
 
