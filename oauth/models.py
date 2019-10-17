@@ -91,7 +91,7 @@ class Platform(BaseModel):
         return self.plat_entity.get_auth_url()
 
     def get_callback_url(self):
-        return self.callback_url if self.callback_url else reverse('oauth:callback')
+        return self.callback_url if self.callback_url else BlogSetting.get_site_url() + reverse('oauth:callback')
 
     def get_token(self, code):
         return self.plat_entity.get_token(code) if self.plat_entity else None

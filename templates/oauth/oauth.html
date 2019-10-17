@@ -1,10 +1,11 @@
 {% load oauth_tags %}
+{% get_oauth_app_list as app_list %}
+{% if app_list %}
 <hr>
 <div class="mt-0">
     <p style="font-size: large">
         第三方登录:
     </p>
-    {% get_oauth_app_list as app_list %}
     <div>
         {% for app in app_list %}
             <span class="mx-2">
@@ -27,3 +28,4 @@
         </div>
     </div>
 </div>
+{% endif %}
