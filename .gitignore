@@ -2,6 +2,7 @@
 */migrations/*
 .idea/*
 static/*
+media/*
 venv/*
 whoosh_index/*
 .vscode/*
