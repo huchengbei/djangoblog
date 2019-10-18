@@ -4,6 +4,8 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.db import models
 
+from mdeditor.fields import MDTextField
+
 # Create your models here.
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
@@ -20,7 +22,7 @@ class BaseModel(models.Model):
 
     def get_full_url(self):
         site = BlogSetting.get_site_url()
-        url = "https://{site}{path}".format(site=site, path=self.get_absolute_url())
+        url = "{site}{path}".format(site=site, path=self.get_absolute_url())
         return url
 
     @abstractmethod
@@ -49,7 +51,7 @@ class Article(BaseModel):
     pub_time = models.DateTimeField('发布时间', blank=True)
     modify_time = models.DateTimeField('更改时间', blank=True)
     summary = models.TextField('摘要', max_length=200, blank=True, help_text='文章摘要置空默认提取文字内容前部分文字')
-    body = models.TextField('正文', help_text='支持markdown')
+    body = MDTextField('正文', help_text='支持markdown')
     comment_type = models.CharField('评论状态', max_length=5, choices=COMMENT_STATUS, default='open')
     views = models.PositiveIntegerField('浏览量', default=0)
     loves = models.PositiveIntegerField('喜爱量', default=0)
