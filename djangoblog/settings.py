@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mdeditor',
+    'imagekit',
     'account.apps.AccountConfig',
     'blog.apps.BlogConfig',
     'comment.apps.CommentConfig',
@@ -134,6 +135,8 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Custom Settings
 AUTH_USER_MODEL = 'account.User'

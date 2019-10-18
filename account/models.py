@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -9,8 +10,8 @@ from pilkit.processors import ResizeToFill
 class User(AbstractUser):
     nickname = models.CharField('昵称', max_length=20, blank=True)
     link = models.URLField('个人网址', blank=True, help_text='请输入个人网址')
-    avatar = ProcessedImageField(upload_to='avatar/%Y/%m/%d',
-                                 default='avatar/default.png',
+    avatar = ProcessedImageField(upload_to=settings.MEDIA_ROOT + '/avatar/%Y/%m/%d',
+                                 default=settings.MEDIA_ROOT + '/avatar/default.png',
                                  verbose_name='头像',
                                  processors=[ResizeToFill(80, 80)])
     email = models.EmailField('邮件地址', blank=True, null=True)
