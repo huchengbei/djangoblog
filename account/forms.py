@@ -9,7 +9,7 @@ class UserCreationForm(BaseUserCreationForm):
 
     class Meta:
         model = get_user_model()
-        fields = ['username', 'email']
+        fields = '__all__'
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -22,7 +22,7 @@ class UserCreationForm(BaseUserCreationForm):
 class UserChangeForm(BaseUserChangeForm):
     class Meta:
         model = get_user_model()
-        fields = ['nickname', 'link', 'avatar']
+        fields = '__all__'
 
 
 class LoginForm(AuthenticationForm):

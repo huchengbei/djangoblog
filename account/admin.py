@@ -20,3 +20,15 @@ class UserAdmin(BaseUserAdmin):
     def link_to_avatar(obj):
         link = obj.avatar
         return format_html(r'<a href="%s"><img style="width:50px;height:50px;" src="%s"></img></a>' % (link, link))
+
+    def __init__(self, model, admin_site):
+        super().__init__(model, admin_site)
+        self.add_fieldsets += (
+            (None, {
+                'classes': ('wide',),
+                'fields': ('email', ),
+            }),
+        )
+        self.fieldsets += (
+            (None, {'fields': ('avatar', )}),
+        )
