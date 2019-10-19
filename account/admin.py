@@ -16,10 +16,10 @@ class UserAdmin(BaseUserAdmin):
     list_display_links = ('username',)
     ordering = ['-id']
 
-    @staticmethod
-    def link_to_avatar(obj):
+    def link_to_avatar(self, obj):
         link = obj.avatar
         return format_html(r'<a href="%s"><img style="width:50px;height:50px;" src="%s"></img></a>' % (link, link))
+    link_to_avatar.short_description = '头像'
 
     def __init__(self, model, admin_site):
         super().__init__(model, admin_site)
