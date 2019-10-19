@@ -8,11 +8,11 @@
         {% csrf_token %}
         {{ form.article }}
         {{ form.parent }}
-        {{ form.user }}
         {% if user.is_authenticated %}
             {#                <div class="mb-3 ml-2 mt-0">#}
             {#                    {{ user }} 请评论:#}
             {#                </div>#}
+            {{ form.user }}
             {{ form.username }}
             {{ form.email }}
             {{ form.website }}
