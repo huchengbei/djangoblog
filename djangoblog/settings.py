@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mdeditor',
-    'imagekit',
     'account.apps.AccountConfig',
     'blog.apps.BlogConfig',
     'comment.apps.CommentConfig',

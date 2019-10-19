@@ -2,6 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.utils.html import format_html
 
 from account.forms import UserCreationForm, UserChangeForm
 from account.models import User
@@ -11,6 +12,11 @@ from account.models import User
 class UserAdmin(BaseUserAdmin):
     add_form = UserCreationForm
     form = UserChangeForm
-    list_display = ('username', 'nickname', 'email', 'link', 'is_staff', 'avatar', 'last_login', 'date_joined')
+    list_display = ('username', 'nickname', 'email', 'link', 'is_staff', 'link_to_avatar', 'last_login', 'date_joined')
     list_display_links = ('username',)
     ordering = ['-id']
+
+    @staticmethod
+    def link_to_avatar(obj):
+        link = obj.avatar
+        return format_html(r'<a href="%s"><img style="width:50px;height:50px;" src="%s"></img></a>' % (link, link))
