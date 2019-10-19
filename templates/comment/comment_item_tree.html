@@ -2,7 +2,13 @@
 <hr class="my-1">
 <div class="media mt-2">
     {#    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">#}
-    <i class="fa fa-user-circle fa-3x my-1 mr-3"></i>
+    <div class="user-avatar mr-3">
+        {% if comment_item.user and comment_item.user.avatar%}
+            <img class="img-fluid" src="{{ comment_item.user.avatar }}" alt="">
+        {% else %}
+            <i class="fa fa-user-circle fa-3x my-1"></i>
+        {% endif %}
+    </div>
     <div class="media-body">
         <h5 class="mt-0" id="comment-{{ comment_item.id }}">{{ comment_item.username }}</h5>
         {{ comment_item.content }}

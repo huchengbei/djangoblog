@@ -22,6 +22,8 @@ def get_comment_form(article, user, parent_id=None):
         parent = Comment.objects.get(id=parent_id)
         form.fields['parent'].initial = parent
     if user.is_authenticated:
+        form.fields['user'].initial = user
+        form.fields['user'].widget.attrs['hidden'] = 'true'
         form.fields['username'].widget.attrs['hidden'] = 'true'
         form.fields['username'].initial = user.nickname
         form.fields['email'].widget.attrs['hidden'] = 'true'

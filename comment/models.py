@@ -1,5 +1,6 @@
 from abc import abstractmethod
 
+from django.conf import settings
 from django.db import models
 
 # Create your models here.
@@ -26,6 +27,10 @@ class Comment(BaseModel):
     email = models.EmailField(verbose_name='邮箱')
     website = models.URLField(verbose_name='网站', blank=True, null=True)
     content = models.TextField(verbose_name='内容')
+
+    # if user login link here to user
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='作者', blank=True, null=True,
+                             on_delete=models.PROTECT)
 
     class Meta:
         ordering = ['-create_time']

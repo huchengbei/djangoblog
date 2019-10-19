@@ -7,7 +7,7 @@ from django.db import models
 class User(AbstractUser):
     nickname = models.CharField('昵称', max_length=20, blank=True)
     link = models.URLField('个人网址', blank=True, help_text='请输入个人网址')
-    avatar = models.URLField('头像', blank=True, help_text='请输入头像网址')
+    avatar = models.URLField('头像', blank=True, null=True, help_text='请输入头像网址')
     email = models.EmailField('邮件地址', blank=True, null=True)
     create_time = models.DateTimeField('创建时间', auto_now_add=True)
     update_time = models.DateTimeField('修改时间', auto_now=True)
