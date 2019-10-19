@@ -10,3 +10,5 @@ class CommentAdmin(admin.ModelAdmin):
     exclude = ['update_time']
     list_display = ('id', 'user',  'username', 'email', 'website', 'content', 'article', 'create_time')
     list_display_links = ('id', 'content')
+
+    readonly_fields = list_display + ('parent', )
