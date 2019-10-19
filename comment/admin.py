@@ -8,5 +8,5 @@ from comment.models import Comment
 class CommentAdmin(admin.ModelAdmin):
     search_fields = ('body', 'title')
     exclude = ['update_time']
-    list_display = ('id', 'username', 'email', 'website', 'content', 'article', 'create_time')
+    list_display = ('id', 'user',  'username', 'email', 'website', 'content', 'article', 'create_time')
     list_display_links = ('id', 'content')

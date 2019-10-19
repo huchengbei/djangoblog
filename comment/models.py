@@ -29,7 +29,7 @@ class Comment(BaseModel):
     content = models.TextField(verbose_name='内容')
 
     # if user login link here to user
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='作者', blank=True, null=True,
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='所属用户', blank=True, null=True,
                              on_delete=models.PROTECT)
 
     class Meta:
