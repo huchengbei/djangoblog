@@ -3,7 +3,7 @@
 {% load blog_tags %}
 
 {% block form_content %}
-    <form class="form-sign" method="post" action="{% url 'account:register' %}?to_url={{ to_url }}">
+    <form class="form-sign" method="post" action="{% url 'account:register' %}?next={{ next }}">
         <img class="mb-4" src="{% static 'img/header.png' %}" alt="" width="72" height="72">
         <div class="card mt-2 p-4 text-center">
             <h1 class="h3 mb-3 font-weight-normal">注册</h1>

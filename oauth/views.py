@@ -13,7 +13,7 @@ def callback(request):
     if not slug or not code:
         context = {
             'oauth_error_message': '授权失败',
-            'to_url': next
+            'next': next
         }
         from account.views import LoginView
         return LoginView.as_view(extra_context=context)(request)
@@ -22,7 +22,7 @@ def callback(request):
     if not token:
         context = {
             'oauth_error_message': '授权失败',
-            'to_url': next
+            'next': next
         }
         from account.views import LoginView
         return LoginView.as_view(extra_context=context)(request)

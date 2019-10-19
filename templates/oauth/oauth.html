@@ -9,7 +9,7 @@
     <div>
         {% for app in app_list %}
             <span class="mx-2">
-                <a href="{{ app.get_auth_url }}&redirect_uri={%  get_redirect_url app.get_callback_url to_url app.slug %}">
+                <a href="{{ app.get_auth_url }}&redirect_uri={%  get_redirect_url app.get_callback_url next app.slug %}">
                     <i class="{{ app.icon }} fa-2x"></i></a>
             </span>
         {% endfor %}

@@ -18,14 +18,14 @@ class RegisterView(FormView):
     def form_valid(self, form):
         user = form.save(False)
         user.save()
-        to_url = self.request.POST.get('to_url', self.request.GET.get('to_url', ''))
-        to_url = to_url if to_url else BlogSetting.get_site_url()
-        url = reverse('account:login') + '?to_url=' + to_url
+        next = self.request.POST.get('next', self.request.GET.get('next', ''))
+        next = next if next else BlogSetting.get_site_url()
+        url = reverse('account:login') + '?next=' + next
         return HttpResponseRedirect(url)
 
     def get_context_data(self, **kwargs):
-        to_url = self.request.POST.get('to_url', self.request.GET.get('to_url', ''))
-        kwargs['to_url'] = to_url
+        next = self.request.POST.get('next', self.request.GET.get('next', ''))
+        kwargs['next'] = next
         return super(RegisterView, self).get_context_data(**kwargs)
 
 
@@ -36,8 +36,8 @@ class LoginView(FormView):
     default_success_url = BlogSetting.get_site_url()
 
     def get_context_data(self, **kwargs):
-        to_url = self.request.POST.get('to_url', self.request.GET.get('to_url', ''))
-        kwargs['to_url'] = to_url
+        next = self.request.POST.get('next', self.request.GET.get('next', ''))
+        kwargs['next'] = next
         return super().get_context_data(**kwargs)
 
     def form_valid(self, form):
@@ -47,10 +47,10 @@ class LoginView(FormView):
 
     def get_success_url(self):
         kwargs = self.get_context_data()
-        to_url = kwargs['to_url']
-        if not to_url:
-            to_url = self.default_success_url
-        return to_url
+        next = kwargs['next']
+        if not next:
+            next = self.default_success_url
+        return next
 
 
 class LogoutView(RedirectView):
@@ -59,6 +59,6 @@ class LogoutView(RedirectView):
         return super().get(request, *args, **kwargs)
 
     def get_redirect_url(self, *args, **kwargs):
-        to_url = self.request.POST.get('to_url', self.request.GET.get('to_url', ""))
-        self.url = to_url if to_url else BlogSetting.get_site_url()
+        next = self.request.POST.get('next', self.request.GET.get('next', ""))
+        self.url = next if next else BlogSetting.get_site_url()
         return self.url

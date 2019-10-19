@@ -48,11 +48,11 @@
                         <a class="nav-link" href="#"><i class="fa fa-user"></i>&nbsp;{{ user }}</a>
                     </li>
                     <li class="nav-item ml-1">
-                        <a class="nav-link" href="{% url 'account:logout' %}?to_url={{ request.get_full_path }}">退出</a>
+                        <a class="nav-link" href="{% url 'account:logout' %}?next={{ request.get_full_path }}">退出</a>
                     </li>
                 {% else %}
                     <li class="nav-item ml-1">
-                        <a class="nav-link" href="{% url 'account:login' %}?to_url={{ request.get_full_path }}">登录</a>
+                        <a class="nav-link" href="{% url 'account:login' %}?next={{ request.get_full_path }}">登录</a>
                     </li>
                     <li class="nav-item ml-1">
                         <a class="nav-link" href="{% url 'account:register' %}">注册</a>
