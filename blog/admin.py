@@ -44,8 +44,7 @@ class ArticleAdmin(admin.ModelAdmin):
     view_on_site = True
     actions = [publish_article, draft_article, open_article_comment_status, close_article_comment_status]
 
-    @staticmethod
-    def link_to_category(obj):
+    def link_to_category(self, obj):
         url_pattern = 'admin:%s_%s_change' % (obj.category._meta.app_label, obj.category._meta.model_name)
         link = reverse(url_pattern, args=(obj.category.id,))
         return format_html(r'<a href="%s">%s</a>' % (link, obj.category.name))
