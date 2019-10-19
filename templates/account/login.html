@@ -17,11 +17,11 @@
                 {{ form.password|widget_with_classes:'form-control' }}
                 {{ form.password.errors }}
             </div>
-            <div class="checkbox mb-3 ml-1 text-left">
-                <label>
-                    <input type="checkbox" value="remember-me"> 记住我
-                </label>
-            </div>
+{#            <div class="checkbox mb-3 ml-1 text-left">#}
+{#                <label>#}
+{#                    <input type="checkbox" value="remember-me"> 记住我#}
+{#                </label>#}
+{#            </div>#}
             <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
             {% include 'account/../oauth/oauth.html' %}
         </div>
