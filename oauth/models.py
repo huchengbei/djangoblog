@@ -105,8 +105,20 @@ class Platform(BaseModel):
         user_ex = UserEx.objects.filter(platform=platform, openid=user_info['openid']).first()
         UserModel = get_user_model()
         if user_ex:
-            return UserModel.objects.get(id=user_ex.user.id)
-        user = UserModel()
+            user = UserModel.objects.get(id=user_ex.user.id)
+        else:
+            user_ex = UserEx()
+            user_ex.platform = platform
+            user_ex.openid = user_info['openid']
+
+            user = UserModel()
+            pwd = str(uuid.uuid1())  # 随机设置用户密码
+            user.set_password(pwd)
+
+        if not user.username or user.username != user_info['username']:
+            while UserModel.objects.filter(username=user_info['username']):
+                import random
+                user_info['username'] += str(random.randint(10, 99))
         user.username = user_info['username']
         user.email = user_info['email']
         if 'nickname' in dir(UserModel):
@@ -115,14 +127,9 @@ class Platform(BaseModel):
             user.link = user_info['link']
         if 'avatar' in dir(UserModel):
             user.avatar = user_info['avatar']
-
-        pwd = str(uuid.uuid1())  # 随机设置用户密码
-        user.set_password(pwd)
         user.save()
-        user_ex = UserEx()
+
         user_ex.user = user
-        user_ex.platform = platform
-        user_ex.openid = user_info['openid']
         user_ex.save()
         return user
 
