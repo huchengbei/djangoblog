@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load blog_tags %}
+{% block site_title %}
+    Blog - 个人信息 - {{ site.site_name }}
+{% endblock %}
+{% block page_content %}
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row my-4">
+
+            <!-- Post Content Column -->
+            <div class="col-md-8 card">
+
+                <!-- Title -->
+                <h2 class="text-center">— 修改信息 —</h2>
+
+                <hr>
+                <div class="card-body px-0">
+                    <form method="post" action="{% url 'account:change' %}?next={{ next }}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="username">{{ form.username.label }}</label>
+                            {{ form.username|widget_with_classes:'form-control' }}
+                            <small id="usernameHelp" class="form-text text-muted">{{ form.username.help_text }}.</small>
+                            {{ form.username.errors }}
+                        </div>
+                        <div class="form-group">
+                            <label for="nickname">{{ form.nickname.label }}</label>
+                            {{ form.nickname|widget_with_classes:'form-control' }}
+                            {{ form.nickname.errors }}
+                        </div>
+                        <div class="form-group">
+                            <label for="email">{{ form.email.label }}</label>
+                            {{ form.email|widget_with_classes:'form-control' }}
+                            {{ form.email.errors }}
+                        </div>
+                        <div class="form-group">
+                            <label for="link">{{ form.link.label }}</label>
+                            {{ form.link|widget_with_classes:'form-control' }}
+                            <small id="linkHelp" class="form-text text-muted">{{ form.link.help_text }}.</small>
+                            {{ form.link.errors }}
+                        </div>
+                        <div class="form-group">
+                            <label for="avatar">{{ form.avatar.label }}</label>
+                            <div class="m-2" style="height: 50px;width: 50px;">
+                                <img class="img-fluid" src="{{ form.avatar.value }}" alt="">
+                            </div>
+                            {{ form.avatar|widget_with_classes:'form-control' }}
+                            <small id="avatarHelp" class="form-text text-muted">{{ form.avatar.help_text }}.</small>
+                            {{ form.avatar.errors }}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+
+                </div>
+            </div>
+
+            <!-- Sidebar Widgets Column -->
+            {% include 'blog/side_bar.html' %}
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+
+{% endblock %}

@@ -11,7 +11,6 @@ from account.models import User
 @admin.register(User)
 class UserAdmin(BaseUserAdmin):
     add_form = UserCreationForm
-    form = UserChangeForm
     list_display = ('username', 'nickname', 'email', 'link', 'is_staff', 'link_to_avatar', 'last_login', 'date_joined')
     list_display_links = ('username',)
     ordering = ['-id']

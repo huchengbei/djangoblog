@@ -19,10 +19,10 @@ class UserCreationForm(BaseUserCreationForm):
         self.fields['password2'].widget.attrs['placeholder'] = "确认密码"
 
 
-class UserChangeForm(BaseUserChangeForm):
+class UserChangeForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
-        fields = '__all__'
+        fields = ['username', 'nickname', 'email', 'link', 'avatar']
 
 
 class LoginForm(AuthenticationForm):

@@ -1,14 +1,14 @@
 from django.contrib import auth
-from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponseRedirect
 
-# Create your views here.
 from django.urls import reverse
-from django.utils.http import is_safe_url
-from django.views.generic import FormView, RedirectView
+from django.views.generic import FormView, RedirectView, UpdateView
 
-from account.forms import UserCreationForm, LoginForm
+from account.forms import UserCreationForm, LoginForm, UserChangeForm
+from account.models import User
 from blog.models import BlogSetting
+
+# Create your views here.
 
 
 class RegisterView(FormView):
@@ -51,6 +51,24 @@ class LoginView(FormView):
         if not next:
             next = self.default_success_url
         return next
+
+
+class ChangeView(UpdateView):
+    form_class = UserChangeForm
+    model = User
+    template_name = 'account/change_profile.html'
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def get_success_url(self):
+        return self.request.GET.get('next', BlogSetting.get_site_url())
+
+    def get_context_data(self, **kwargs):
+        next = self.request.GET.get('next', BlogSetting.get_site_url())
+        if 'next' not in kwargs:
+            kwargs['next'] = next
+        return super().get_context_data(**kwargs)
 
 
 class LogoutView(RedirectView):
