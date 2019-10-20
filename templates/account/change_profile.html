@@ -17,6 +17,10 @@
                 <h2 class="text-center">— 修改信息 —</h2>
 
                 <hr>
+                <span>单击
+                    <a href="{% url 'account:change_password' %}?next={{ next }}" style="color: #23B7F3">&nbsp;此处&nbsp;</a>
+                    修改密码
+                </span>
                 <div class="card-body px-0">
                     <form method="post" action="{% url 'account:change' %}?next={{ next }}">
                         {% csrf_token %}

@@ -1,12 +1,14 @@
 from django.contrib import auth
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 
 from django.urls import reverse
 from django.views.generic import FormView, RedirectView, UpdateView
 
-from account.forms import UserCreationForm, LoginForm, UserChangeForm
+from account.forms import UserCreationForm, LoginForm, UserChangeForm, PasswordChangeForm
 from account.models import User
 from blog.models import BlogSetting
+
 
 # Create your views here.
 
@@ -53,10 +55,12 @@ class LoginView(FormView):
         return next
 
 
-class ChangeView(UpdateView):
+class ChangeView(LoginRequiredMixin, UpdateView):
     form_class = UserChangeForm
     model = User
     template_name = 'account/change_profile.html'
+    # do not login, just back to home
+    login_url = BlogSetting.get_site_url()
 
     def get_object(self, queryset=None):
         return self.request.user
@@ -71,7 +75,30 @@ class ChangeView(UpdateView):
         return super().get_context_data(**kwargs)
 
 
-class LogoutView(RedirectView):
+class PasswordChangeView(LoginRequiredMixin, UpdateView):
+    form_class = PasswordChangeForm
+    model = User
+    template_name = 'account/change_password.html'
+    # do not login, just back to home
+    login_url = BlogSetting.get_site_url()
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def get_success_url(self):
+        return self.request.GET.get('next', BlogSetting.get_site_url())
+
+    def get_context_data(self, **kwargs):
+        next = self.request.GET.get('next', BlogSetting.get_site_url())
+        if 'next' not in kwargs:
+            kwargs['next'] = next
+        return super().get_context_data(**kwargs)
+
+
+class LogoutView(LoginRequiredMixin, RedirectView):
+    # do not login, just back to home
+    login_url = BlogSetting.get_site_url()
+
     def get(self, request, *args, **kwargs):
         auth.logout(request)
         return super().get(request, *args, **kwargs)
