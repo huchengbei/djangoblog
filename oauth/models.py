@@ -46,7 +46,7 @@ class Platform(BaseModel):
     name = models.CharField('平台名', max_length=10, choices=PLATFORM_CHOICE)
     slug = models.SlugField('Slug', max_length=50, unique=True, blank=True)
     icon = models.CharField('图标', max_length=30, blank=True,
-                            help_text='fontawesome图标名, class内名称，如 "fa fa-github" ')
+                            help_text='fontawesome图标名, class内名称，如 "fab fa-github" ')
     client_id = models.CharField('Client ID', max_length=100)
     client_secret = models.CharField('Client Secret', max_length=100)
     auth_url = models.URLField('认证网址', blank=True, null=True, help_text='不填则使用默认认证网址')
