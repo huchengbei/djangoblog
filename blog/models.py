@@ -20,11 +20,6 @@ class BaseModel(models.Model):
     class Meta:
         abstract = True
 
-    def get_full_url(self):
-        site = BlogSetting.get_site_url()
-        url = "{site}{path}".format(site=site, path=self.get_absolute_url())
-        return url
-
     @abstractmethod
     def get_absolute_url(self):
         pass
