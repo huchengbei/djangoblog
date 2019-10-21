@@ -62,9 +62,9 @@
             </li>
             <li class="list-inline-item">
                 <div class="site-info">
-                    {% if analytics_code %}
+                    {% if site.analytics_code %}
                         |&nbsp;
-                        {{ analytics_code }}
+                        {{ site.analytics_code|safe }}
                     {% endif %}
                 </div>
             </li>

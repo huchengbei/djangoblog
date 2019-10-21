@@ -312,7 +312,7 @@ class BlogSetting(models.Model):
     ads_content_codes = models.TextField('广告代码', max_length=2000, blank=True, default='', help_text='广告HTML代码')
 
     ICP_number = models.CharField('备案号', max_length=100, blank=True, default='')
-    analytics_code = models.TextField('网站统计代码', max_length=100, blank=True, default='')
+    analytics_code = models.TextField('网站统计代码', max_length=1000, blank=True, default='')
     show_gongan_number = models.BooleanField('是否显示备案号', default=False)
     gongan_number = models.CharField('公安备案号', max_length=100, blank=True, default='')
     static_source = models.CharField('静态文件地址', max_length=200, blank=True, default='')
