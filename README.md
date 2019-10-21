@@ -24,10 +24,20 @@ pip install -r requirements.txt
 python manage.py makemigrations
 python manage.py migrate
 ```
+
+### 2.4 创建超级用户
+```bash
+python manage.py createsuperuser
+```
 ### 2.5 测试
 ```bash
 python manage.py runserver
 ```
+
+### 2.6 设置网站信息
+运行之后必须先进后台`/admin`在`Blog`进行`网站配置`
+
+否则无法使用
 
 ## 3.更新日志
 ### V2.0
