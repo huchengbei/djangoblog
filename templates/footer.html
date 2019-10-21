@@ -1,4 +1,4 @@
-<footer class="pt-3 pb-2 bg-dark">
+<footer class="py-1 bg-dark">
     <div class="container">
     <!-- Some Icons
         <div class="row">
@@ -32,7 +32,7 @@
             </div>
         </div>
         -->
-        <ul class="list-inline text-center text-white">
+        <ul class="list-inline text-center text-white m-1">
             <li class="list-inline-item">
                 <p class="m-0 copyright text-center text-white">
                     基于
@@ -42,18 +42,18 @@
                     构建
                 </p>
             </li>
-            |&nbsp;
             <li class="list-inline-item">
                 <p class="m-0 copyright text-center text-white">
+                    |&nbsp;
                     <a class="text-white" href="https://github.com/huchengbei/DjangoBlog" target="blank">
                         DjangoBlog
                     </a>
                     &copy; 2019
                 </p>
             </li>
-            |&nbsp;
             <li class="list-inline-item">
                 <p class="m-0 copyright text-center text-white">
+                    |&nbsp;
                     托管于
                     <a class="text-white" href="https://clout.tencent.com" target="blank">
                         腾讯云
@@ -61,11 +61,12 @@
                 </p>
             </li>
             <li class="list-inline-item">
-            <div class="site-info">
-                {% if analytics_code %}
-                    {{ analytics_code }}
-                {% endif %}
-            </div>
+                <div class="site-info">
+                    {% if analytics_code %}
+                        |&nbsp;
+                        {{ analytics_code }}
+                    {% endif %}
+                </div>
             </li>
         </ul>
     </div>
