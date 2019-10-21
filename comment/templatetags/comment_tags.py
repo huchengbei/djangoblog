@@ -15,15 +15,12 @@ def get_article_comment_list(article_id, parent=None):
 @register.simple_tag(name='get_comment_form')
 def get_comment_form(article, user, parent_id=None):
     form = CommentForm()
-    form.fields['article'].widget.attrs['hidden'] = 'true'
     form.fields['article'].initial = article
-    form.fields['parent'].widget.attrs['hidden'] = 'true'
     if parent_id:
         parent = Comment.objects.get(id=parent_id)
         form.fields['parent'].initial = parent
     if user.is_authenticated:
         form.fields['user'].initial = user
-        form.fields['user'].widget.attrs['hidden'] = 'true'
         form.fields['username'].widget.attrs['hidden'] = 'true'
         form.fields['username'].initial = user.nickname
         form.fields['email'].widget.attrs['hidden'] = 'true'

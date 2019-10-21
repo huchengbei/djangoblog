@@ -11,6 +11,9 @@ class CommentForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['article'].widget = forms.HiddenInput()
+        self.fields['parent'].widget = forms.HiddenInput()
+        self.fields['user'].widget = forms.HiddenInput()
         self.fields['username'].widget.attrs['placeholder'] = "名字"
         self.fields['email'].widget.attrs['placeholder'] = "邮箱"
         self.fields['website'].widget.attrs['placeholder'] = "网站"
