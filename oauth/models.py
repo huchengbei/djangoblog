@@ -108,11 +108,10 @@ class Platform(BaseModel):
             return UserModel.objects.get(id=user_ex.user.id)
 
         user = UserModel()
-        if user.username and user.username != user_info['username']:
-            while UserModel.objects.filter(username=user_info['username']):
-                import random
-                user_info['username'] += str(random.randint(10, 99))
-            user.username = user_info['username']
+        while UserModel.objects.filter(username=user_info['username']):
+            import random
+            user_info['username'] += str(random.randint(10, 99))
+        user.username = user_info['username']
         pwd = str(uuid.uuid1())  # 随机设置用户密码
         user.set_password(pwd)
         user.email = user_info['email']
