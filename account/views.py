@@ -7,7 +7,6 @@ from django.views.generic import FormView, RedirectView, UpdateView
 
 from account.forms import UserCreationForm, LoginForm, UserChangeForm, PasswordChangeForm
 from account.models import User
-from blog.models import BlogSetting
 
 
 # Create your views here.
@@ -21,7 +20,7 @@ class RegisterView(FormView):
         user = form.save(False)
         user.save()
         next = self.request.POST.get('next', self.request.GET.get('next', ''))
-        next = next if next else BlogSetting.get_site_url()
+        next = next if next else '/'
         url = reverse('account:login') + '?next=' + next
         return HttpResponseRedirect(url)
 
@@ -35,7 +34,7 @@ class RegisterView(FormView):
 class LoginView(FormView):
     form_class = LoginForm
     template_name = 'account/login.html'
-    default_success_url = BlogSetting.get_site_url()
+    default_success_url = '/'
 
     def get_context_data(self, **kwargs):
         next = self.request.POST.get('next', self.request.GET.get('next', ''))
@@ -60,16 +59,16 @@ class ChangeView(LoginRequiredMixin, UpdateView):
     model = User
     template_name = 'account/change_profile.html'
     # do not login, just back to home
-    login_url = BlogSetting.get_site_url()
+    login_url = '/'
 
     def get_object(self, queryset=None):
         return self.request.user
 
     def get_success_url(self):
-        return self.request.GET.get('next', BlogSetting.get_site_url())
+        return self.request.GET.get('next', '/')
 
     def get_context_data(self, **kwargs):
-        next = self.request.GET.get('next', BlogSetting.get_site_url())
+        next = self.request.GET.get('next', '/')
         if 'next' not in kwargs:
             kwargs['next'] = next
         return super().get_context_data(**kwargs)
@@ -80,16 +79,16 @@ class PasswordChangeView(LoginRequiredMixin, UpdateView):
     model = User
     template_name = 'account/change_password.html'
     # do not login, just back to home
-    login_url = BlogSetting.get_site_url()
+    login_url = '/'
 
     def get_object(self, queryset=None):
         return self.request.user
 
     def get_success_url(self):
-        return self.request.GET.get('next', BlogSetting.get_site_url())
+        return self.request.GET.get('next', '/')
 
     def get_context_data(self, **kwargs):
-        next = self.request.GET.get('next', BlogSetting.get_site_url())
+        next = self.request.GET.get('next', '/')
         if 'next' not in kwargs:
             kwargs['next'] = next
         return super().get_context_data(**kwargs)
@@ -97,13 +96,13 @@ class PasswordChangeView(LoginRequiredMixin, UpdateView):
 
 class LogoutView(LoginRequiredMixin, RedirectView):
     # do not login, just back to home
-    login_url = BlogSetting.get_site_url()
+    login_url = '/'
 
     def get(self, request, *args, **kwargs):
         auth.logout(request)
         return super().get(request, *args, **kwargs)
 
     def get_redirect_url(self, *args, **kwargs):
-        next = self.request.POST.get('next', self.request.GET.get('next', ""))
-        self.url = next if next else BlogSetting.get_site_url()
+        next = self.request.POST.get('next', self.request.GET.get('next', ''))
+        self.url = next if next else '/'
         return self.url
