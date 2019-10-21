@@ -208,7 +208,7 @@ class Navigation(BaseModel):
     )
 
     name = models.CharField('导航名', max_length=30, blank=True, help_text='置空则为相应实体名字')
-    icon = models.CharField('图标', max_length=30, blank=True,
+    icon = models.CharField('图标', max_length=30, blank=True, null=True,
                             help_text='fontawesome图标名, class内名称，如 "fa fa-home" ')
     type = models.CharField('导航类型', max_length=8, choices=TYPE, default='blank')
     parent = models.ForeignKey('self', verbose_name='父导航', blank=True, null=True, on_delete=models.SET_NULL)
