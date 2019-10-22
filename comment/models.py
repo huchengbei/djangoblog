@@ -32,7 +32,7 @@ class Comment(BaseModel):
     email = models.EmailField(verbose_name='邮箱')
     website = models.URLField(verbose_name='网站', blank=True, null=True)
     content = models.TextField(verbose_name='内容')
-    status = models.CharField('屏蔽状态', max_length=5, choices=STATUS, default='open')
+    status = models.CharField('屏蔽状态', max_length=5, choices=STATUS, default='open', blank=True)
 
     # if user login link here to user
     user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='所属用户', blank=True, null=True,
