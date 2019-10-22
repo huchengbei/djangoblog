@@ -8,7 +8,7 @@ register = template.Library()
 
 @register.simple_tag(name='get_article_comment_list')
 def get_article_comment_list(article_id, parent=None):
-    comment_list = Comment.objects.filter(article_id=article_id, parent=parent)
+    comment_list = Comment.objects.filter(article_id=article_id, parent=parent, status='open')
     return comment_list
 
 

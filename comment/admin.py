@@ -20,7 +20,7 @@ open_comment_status.short_description = '开放'
 class CommentAdmin(admin.ModelAdmin):
     search_fields = ('body', 'title')
     exclude = ['update_time']
-    list_display = ('id', 'user', 'username', 'email', 'website', 'content', 'article', 'create_time')
+    list_display = ('id', 'user', 'username', 'email', 'website', 'status', 'content', 'article', 'create_time')
     list_display_links = ('id', 'content')
 
     readonly_fields = list_display + ('parent',)
