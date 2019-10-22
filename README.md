@@ -48,6 +48,7 @@ python manage.py runserver
 - 更改评论界面，具有多级样式
 - 缩短摘要长度，使界面更简洁
 - 后端编辑Markdown文章实时预览
+- 评论可以审核，并添加了anti_spam字段，有值则为垃圾
 - 修复部分bug
 
 
