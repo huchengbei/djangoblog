@@ -21,12 +21,18 @@ class BaseModel(models.Model):
 
 
 class Comment(BaseModel):
+
+    STATUS = (
+        ('open', '开发'),
+        ('close', '屏蔽'),
+    )
     article = models.ForeignKey(Article, verbose_name='文章', on_delete=models.PROTECT)
     parent = models.ForeignKey('self', verbose_name='父评论', blank=True, null=True, on_delete=models.SET_NULL)
     username = models.CharField(verbose_name='名字', max_length=20)
     email = models.EmailField(verbose_name='邮箱')
     website = models.URLField(verbose_name='网站', blank=True, null=True)
     content = models.TextField(verbose_name='内容')
+    status = models.CharField('屏蔽状态', max_length=5, choices=STATUS, default='open')
 
     # if user login link here to user
     user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='所属用户', blank=True, null=True,
