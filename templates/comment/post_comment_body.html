@@ -8,6 +8,7 @@
         {% csrf_token %}
         {{ form.article }}
         {{ form.parent }}
+        {{ form.anti_spam }}
         {% if user.is_authenticated %}
             {#                <div class="mb-3 ml-2 mt-0">#}
             {#                    {{ user }} 请评论:#}
