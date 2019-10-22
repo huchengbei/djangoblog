@@ -32,5 +32,5 @@ def get_comment_form(article, user, parent_id=None):
 
 @register.simple_tag(name='get_comment_count')
 def get_comment_count(article):
-    return Comment.objects.filter(article=article).count()
+    return Comment.objects.filter(article=article, status='open').count()
 
