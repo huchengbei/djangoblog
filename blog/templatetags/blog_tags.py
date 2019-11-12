@@ -1,8 +1,7 @@
-import datetime
-
 import markdown
 from django import template
 from django.template.defaultfilters import stringfilter
+from django.utils import timezone
 
 from blog.models import Article, Category, Tag, ExtendsSideBar, FriendLink, BlogSetting
 
@@ -65,7 +64,7 @@ def markdown_to_html(body):
 @register.simple_tag(name='get_article_list')
 def get_article_list(sort=None):
     num = get_site_info().sidebar_article_num
-    now = datetime.datetime.now()
+    now = timezone.now()
     articles = Article.objects.filter(status='published', type='article', pub_time__lte=now)
     if sort:
         if num:
@@ -80,7 +79,7 @@ def get_article_list(sort=None):
 def get_category_list():
     from django.db.models import Count
     from django.db.models import Q
-    now = datetime.datetime.now()
+    now = timezone.now()
     q = Q(article__type='article', article__status='published', article__pub_time__lte=now)
     return Category.objects.annotate(article__count=Count('article', filter=q))
 
@@ -89,7 +88,7 @@ def get_category_list():
 def get_tag_list():
     from django.db.models import Count
     from django.db.models import Q
-    now = datetime.datetime.now()
+    now = timezone.now()
     q = Q(article__type='article', article__status='published', article__pub_time__lte=now)
     return Tag.objects.annotate(article__count=Count('article', filter=q))
 

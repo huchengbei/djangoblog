@@ -1,11 +1,9 @@
-import datetime
-
-from django.shortcuts import render
-
-# Create your views here.
+from django.utils import timezone
 from django.views.generic import ListView, DetailView
 
 from blog.models import Article, BlogSetting
+
+# Create your views here.
 
 
 class BaseArticlesListView(ListView):
@@ -20,7 +18,7 @@ class BaseArticlesListView(ListView):
 
     def get_queryset(self):
         articles = super(BaseArticlesListView, self).get_queryset()
-        now = datetime.datetime.now()
+        now = timezone.now()
         return articles.filter(type='article', status='published', pub_time__lte=now)
 
 

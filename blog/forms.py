@@ -14,8 +14,8 @@ class ArticleForm(forms.ModelForm):
             changed_data = self.changed_data
             if 'title' in changed_data or 'author' in changed_data or \
                     'summary' in changed_data or 'body' in changed_data:
-                import datetime
-                cleaned_data['modify_time'] = datetime.datetime.now()
+                from django.utils import timezone
+                cleaned_data['modify_time'] = timezone.now()
         return cleaned_data
 
 
