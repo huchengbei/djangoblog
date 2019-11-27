@@ -41,6 +41,7 @@ python manage.py runserver
 
 ## 3.更新日志
 ### V2.0
+2019年11月27日，改版为v2
 
 - 改版界面UI，使用BootStrap4构建
 - 实现用户的注册、登录、注销
